@@ -1,11 +1,12 @@
 <template>
-  <div class="box-wrap">
+  <div class="page-wrap box-wrap">
 
-    <!--    <div class="page-title">登登获客</div>-->
+    <div class="page-title">登登获客</div>
 
     <ul class="box-list">
       <li v-for="(item, key, index) in items" :key="index">
         <div class="box-item">
+          <i class="ddfont dd-arrow-right arrow-right"></i>
           <div class="box-icon">
             <i class="ddfont" :class="item.icon"></i>
           </div>
@@ -29,19 +30,31 @@ export default {
         {
           icon: 'dd-chaolianjie',
           title: '链接分享',
-          desc: '通过输入链接分享你的页面',
+          desc: '输入你分享的链接地址',
           path: ''
         },
         {
           icon: 'dd-tuwenxiangqing',
           title: '图文编辑分享',
-          desc: '通过自己手动编辑图文，生成你的分享页面',
+          desc: '进入编辑分享你的长图文',
           path: ''
         },
         {
           icon: 'dd-sucai',
           title: '我的素材',
-          desc: '自己保存的页面列表',
+          desc: '今日点击0人，本月4人',
+          path: ''
+        },
+        {
+          icon: 'dd-bangzhu',
+          title: '如何使用',
+          desc: '教你使用登登获客',
+          path: ''
+        },
+        {
+          icon: 'dd-guanyuwomen',
+          title: '关于我们',
+          desc: '登登获客可以做什么',
           path: ''
         }
       ]
@@ -54,61 +67,40 @@ export default {
   @import "@/assets/index.scss";
 
   .box-wrap {
-    padding: rem(10) rem(20);
-
-    .page-title {
-      font-size: rem(26);
-      margin: 1.2em 0 1.5em;
-      font-weight: bold;
-    }
 
     .box-list {
       li {
-        margin: rem(15) 0;
-
-        &:nth-child(1) {
-          i {
-            color: #4776FF;
-          }
-        }
-
-        &:nth-child(2) {
-          i {
-            color: #F86C4F;
-          }
-        }
-
-        &:nth-child(3) {
-          i {
-            color: #F5B535;
-          }
-        }
-
-        &:nth-child(1) {
-          i {
-            color: #7288FF;
-          }
-        }
+        margin: rem(26) 0;
 
         .box-item {
           display: flex;
-          border-radius: rem(10);
-          background: #FFFFFF;
+          border-radius: rem(20);
+          background: #E5E4E5;
           padding: rem(10);
-          box-shadow: 0 rem(1) rem(10) rgba(0, 0, 0, 0.1);;
+          position: relative;
+
+          .arrow-right {
+            position: absolute;
+            right: rem(30);
+            top: 50%;
+            transform: translate(0, -50%);
+          }
 
           .box-icon {
-            width: rem(80);
-            height: rem(80);
-            margin-right: rem(10);
+            width: rem(50);
+            height: rem(50);
+            border-radius: rem(20);
+            margin: rem(10) rem(20) rem(10) rem(10);
+            background: #4E38B4;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
             i {
-              font-size: rem(50);
-              height: rem(50);
+              color: #fff;
+              font-size: rem(24);
+              height: rem(24);
             }
           }
 
@@ -116,14 +108,15 @@ export default {
             flex: 1;
 
             .title {
+              margin-top: rem(13);
               font-weight: bold;
-              font-size: rem(18);
-              line-height: rem(40);
+              font-size: rem(16);
+              color: #000;
             }
 
             .desc {
-              color: #656875;
-              line-height: rem(20);
+              color: #A09FA0;
+              margin-top: rem(2);
               font-size: rem(14);
             }
           }

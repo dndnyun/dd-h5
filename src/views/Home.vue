@@ -28,6 +28,7 @@ export default {
     flex-flow: column;
     height: 100%;
     width: 100%;
+    background: #EDECED;
 
     .main-content {
       flex: 1;
@@ -35,36 +36,36 @@ export default {
     }
 
     .main-tab-bar-wrap {
+      border-radius: rem(20) rem(20) 0 0;
       height: rem(60);
-      line-height: rem(60);
-      background: #FFFFFF;
+      background: #F3CF47;
       display: flex;
 
       div {
         text-align: center;
         flex: 1;
         font-size: rem(16);
-        color: #252A3B;
 
         a {
-          padding: rem(10) rem(30);
+          height: rem(60);
+          color: rgba(0, 0, 0, 0.3);
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
 
           .ddfont {
+            display: block;
             margin-right: rem(5);
+            font-size: rem(24);
           }
 
           span {
-            display: none;
+            display: block;
           }
 
           &.router-link-exact-active {
-            background: #F1F4FF;
-            border-radius: rem(30);
-            color: #3266FF;
-
-            span {
-              display: inline;
-            }
+            color: #000;
           }
         }
 
