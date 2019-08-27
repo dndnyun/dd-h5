@@ -14,5 +14,5 @@ $fontSize: 16;
 }
 
 @function rem($args) {
-  @return $args / $fontSize+rem;
+  @return $args / $fontSize + rem;
 }

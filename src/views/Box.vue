@@ -4,7 +4,7 @@
     <div class="page-title">登登获客</div>
 
     <ul class="box-list">
-      <li v-for="(item, key, index) in items" :key="index">
+      <li v-for="(item, key, index) in items" :key="index" @click="handleClick(item)">
         <div class="box-item">
           <i class="ddfont dd-arrow-right arrow-right"></i>
           <div class="box-icon">
@@ -31,7 +31,7 @@ export default {
           icon: 'dd-chaolianjie',
           title: '链接分享',
           desc: '输入你分享的链接地址',
-          path: ''
+          path: 'my-material'
         },
         {
           icon: 'dd-tuwenxiangqing',
@@ -43,7 +43,7 @@ export default {
           icon: 'dd-sucai',
           title: '我的素材',
           desc: '今日点击0人，本月4人',
-          path: ''
+          path: 'my-material'
         },
         {
           icon: 'dd-bangzhu',
@@ -58,6 +58,11 @@ export default {
           path: ''
         }
       ]
+    }
+  },
+  methods: {
+    handleClick (_item) {
+      this.$router.push({ name: 'my-material' })
     }
   }
 }

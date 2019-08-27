@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap user-wrap">
 
-    <div class="page-title">用户中心</div>
+    <div class="page-title"></div>
 
   </div>
 </template>

@@ -10,20 +10,25 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: "about" */ './views/Home.vue'),
+      component: () => import('./views/Home.vue'),
       redirect: '/box',
       children: [
         {
           path: '/box',
           name: 'box',
-          component: () => import(/* webpackChunkName: "about" */ './views/Box.vue')
+          component: () => import('./views/Box.vue')
         },
         {
           path: '/user',
           name: 'user',
-          component: () => import(/* webpackChunkName: "about" */ './views/User.vue')
+          component: () => import('./views/User.vue')
         }
       ]
+    },
+    {
+      path: '/my-material',
+      name: 'my-material',
+      component: () => import('./views/my-material/index.vue')
     }
   ]
 })

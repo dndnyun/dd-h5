@@ -38,7 +38,7 @@ export default {
     .main-tab-bar-wrap {
       border-radius: rem(20) rem(20) 0 0;
       height: rem(60);
-      background: #F3CF47;
+      background: #F3D45B;
       display: flex;
 
       div {
@@ -48,7 +48,7 @@ export default {
 
         a {
           height: rem(60);
-          color: rgba(0, 0, 0, 0.3);
+          color: rgba(0, 0, 0, .3);
           display: flex;
           flex-flow: column;
           justify-content: center;
