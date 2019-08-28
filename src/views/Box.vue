@@ -1,7 +1,8 @@
 <template>
   <div class="page-wrap box-wrap">
 
-    <div class="page-title">登登获客</div>
+    <!--    <div class="page-title">登登获客</div>-->
+    <PageTitle title="登登获客"></PageTitle>
 
     <ul class="box-list">
       <li v-for="(item, key, index) in items" :key="index" @click="handleClick(item)">
@@ -72,15 +73,16 @@ export default {
   @import "@/assets/index.scss";
 
   .box-wrap {
-
     .box-list {
+      padding: rem(10) rem(30);
+
       li {
         margin: rem(26) 0;
 
         .box-item {
           display: flex;
           border-radius: rem(20);
-          background: #E5E4E5;
+          background: #FFFFFF;
           padding: rem(10);
           position: relative;
 
@@ -96,7 +98,7 @@ export default {
             height: rem(50);
             border-radius: rem(20);
             margin: rem(10) rem(20) rem(10) rem(10);
-            background: #4E38B4;
+            background: #4F5EFB;
 
             display: flex;
             justify-content: center;
@@ -116,11 +118,11 @@ export default {
               margin-top: rem(13);
               font-weight: bold;
               font-size: rem(16);
-              color: #000;
+              color: #504A61;
             }
 
             .desc {
-              color: #A09FA0;
+              color: #5F5D6E;
               margin-top: rem(2);
               font-size: rem(14);
             }

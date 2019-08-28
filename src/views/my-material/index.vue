@@ -21,13 +21,13 @@
 
           <div class="box-content">
             <div class="title">{{ item.title }}</div>
-            <div class="desc">{{ item.desc }}</div>
           </div>
 
           <div class="box-right">
             <i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i>
           </div>
         </div>
+        <div class="desc">{{ item.desc }}</div>
       </li>
     </ul>
   </div>
@@ -87,29 +87,46 @@ export default {
   @import "@/assets/index.scss";
 
   .my-material-wrap {
-    background: #F3D45B;
+    /*background: linear-gradient(to bottom, #FCCE02, #FEA909);*/
+    background: #FCCE02;
     min-height: 100%;
 
     .page-title {
-      color: rgba(0, 0, 0);
+      color: #fff7d1;
     }
 
     .box-list {
-      li {
-        border-bottom: rem(1) solid rgba(0, 0, 0, .1);
+      padding: rem(10) rem(30);
 
-        &:first-child {
-          border-top: rem(1) solid rgba(0, 0, 0, .1);
+      li {
+
+        margin-bottom: rem(20);
+        border-radius: rem(20);
+        box-shadow: 0 rem(10) rem(30) rgba(black, .1);
+
+        .desc {
+          color: rgba(0, 0, 0, .6);
+          font-weight: bold;
+          font-size: rem(14);
+          background: #ffd53b;
+          margin-top: rem(-20);
+          padding: rem(20) rem(20) 0;
+          height: rem(60);
+          line-height: rem(40);
+          border-radius: 0 0 rem(20) rem(20);
         }
 
         .box-item {
           display: flex;
-          padding: rem(10) 0;
           position: relative;
+          background: #FFF9EC;
+          border-radius: rem(20);
+          padding: rem(10) rem(20);
 
           .box-right {
             position: relative;
-            width: rem(70);
+            width: rem(30);
+            margin-left: rem(20);
 
             .icon-right {
               position: absolute;
@@ -153,15 +170,14 @@ export default {
 
           .box-content {
             flex: 1;
+            display: flex;
+            align-items: center;
 
             .title {
-              margin-top: rem(5);
               font-weight: bold;
               font-size: rem(16);
               line-height: rem(20);
-              height: rem(40);
-              color: #000;
-
+              color: #534C5E;
               display: -webkit-box;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -169,12 +185,7 @@ export default {
               -webkit-line-clamp: 2; //当属性值为3，表示超出3行隐
             }
 
-            .desc {
-              color: rgba(0, 0, 0, .4);
-              font-weight: bold;
-              margin-top: rem(2);
-              font-size: rem(14);
-            }
+
           }
 
         }

@@ -8,7 +8,8 @@
   @import "@/assets/index.scss";
 
   .page-wrap {
-    padding: rem(10) rem(30);
+    position: relative;
+    overflow: hidden;
   }
 
   .page-title {
