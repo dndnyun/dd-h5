@@ -29,7 +29,7 @@ export default {
     transform: translate3d(0, 0, 0);
     position: relative;
 
-    &:before {
+    &:before, &:after {
       content: ".";
       display: block;
       height: 0;

@@ -5,6 +5,7 @@
 </template>
 
 <style lang="scss">
+  @import "@/assets/public.scss";
   @import "@/assets/index.scss";
 
   .page-wrap {
