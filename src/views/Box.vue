@@ -31,13 +31,13 @@ export default {
           icon: 'dd-chaolianjie',
           title: '链接分享',
           desc: '输入你分享的链接地址',
-          path: 'my-material'
+          path: ''
         },
         {
           icon: 'dd-tuwenxiangqing',
           title: '图文编辑分享',
           desc: '进入编辑分享你的长图文',
-          path: ''
+          path: 'new-material'
         },
         {
           icon: 'dd-sucai',
@@ -62,7 +62,8 @@ export default {
   },
   methods: {
     handleClick (_item) {
-      this.$router.push({ name: 'my-material' })
+      if (!_item.path) return
+      this.$router.push({ name: _item.path })
     }
   }
 }
