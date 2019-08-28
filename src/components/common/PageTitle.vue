@@ -25,7 +25,6 @@ export default {
 
   .box-title {
     width: 100%;
-    /*background: lighten(#f0f4c3, 10%);*/
     background: none;
     transform: translate3d(0, 0, 0);
     position: relative;
@@ -37,23 +36,8 @@ export default {
       visibility: hidden;
     }
 
-    .wave {
-      position: absolute;
-      top: -50%;
-      left: 50%;
-      width: rem(500);
-      height: rem(520);
-      margin-left: rem(-300);
-      margin-top: rem(-400);
-      border-radius: 35%;
-      background: #4F5EFB;
-      transform: rotate(180deg);
-    }
-
     .wave-svg {
       position: absolute;
-      /*top: 0;*/
-      /*left: 0;*/
       transform: rotateX(180deg);
       fill: #4F5EFB;
       height: rem(400);
@@ -68,7 +52,6 @@ export default {
       transform: translate3d(0, 0, 0);
       color: #fff;
       text-transform: uppercase;
-      text-shadow: 0 rem(1) 0 rgba(black, .1);
     }
   }
 </style>

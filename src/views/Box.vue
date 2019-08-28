@@ -1,7 +1,6 @@
 <template>
   <div class="page-wrap box-wrap">
 
-    <!--    <div class="page-title">登登获客</div>-->
     <PageTitle title="登登获客"></PageTitle>
 
     <ul class="box-list">
@@ -78,6 +77,8 @@ export default {
 
       li {
         margin: rem(26) 0;
+        border-radius: rem(20);
+        box-shadow: 0 rem(10) rem(30) rgba(black, .1);
 
         .box-item {
           display: flex;

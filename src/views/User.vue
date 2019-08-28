@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap user-wrap">
 
-    <div class="page-title"></div>
+    <PageTitle title="我的登登"></PageTitle>
 
   </div>
 </template>

@@ -161,8 +161,8 @@ export default {
               height: rem(50);
               border-radius: rem(20);
               font-size: rem(30);
-              background: rgba(0, 0, 0, .2);
-
+              background: #ffdd46;
+              color: #fff;
               justify-content: center;
               align-items: center;
             }
@@ -177,19 +177,15 @@ export default {
               font-weight: bold;
               font-size: rem(16);
               line-height: rem(20);
-              color: #534C5E;
+              color: #504A62;
               display: -webkit-box;
               text-overflow: ellipsis;
               overflow: hidden;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2; //当属性值为3，表示超出3行隐
             }
-
-
           }
-
         }
-
       }
     }
   }
