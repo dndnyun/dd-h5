@@ -16,7 +16,7 @@
 
   .page-title {
     font-size: rem(26);
-    margin: 1.2em rem(30) 1em;
+    padding: 1.2em rem(30) 1em;
     font-weight: bold;
 
     .page-breadcrumb {
