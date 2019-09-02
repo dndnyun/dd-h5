@@ -26,7 +26,8 @@ axios.interceptors.request.use(requestConfig => {
 axios.interceptors.response.use(response => {
   if (response.code === 0) {
     return Promise.resolve(response.data)
-  } else if (response.code === 401 || response.code === 403) {
+  } else {
+    return Promise.reject(response.msg) // 返回接口错误信息
   }
 }, error => {
   console.log(error)

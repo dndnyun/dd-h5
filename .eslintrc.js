@@ -16,6 +16,7 @@ module.exports = {
   },
   globals: {
     'wx': true,
+    'weui': true,
     'appConfig': true
   }
 }

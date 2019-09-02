@@ -11,7 +11,7 @@
       </div>
       <div class="weui-msg__opr-area">
         <p class="weui-btn-area">
-          <a href="javascript:history.back();" class="weui-btn weui-btn_default">重新授权</a>
+          <a href="javascript: void(0)" @click="handleOauth2" class="weui-btn weui-btn_default">重新授权</a>
         </p>
       </div>
       <div class="weui-msg__extra-area">
@@ -21,8 +21,7 @@
           </p>
           <p class="weui-footer__text">Copyright &copy; 2019-2020 dndnyun.com</p>
         </div>
-      </div>
-    </div>
+      </div>    </div>
   </div>
 </template>
 
@@ -38,21 +37,30 @@ export default {
   mounted () {
     const str = getQueryParameters()
     if (str.code) {
-      window.localStorage.setItem('DD_X_CODE', str.code)
-      this.login()
+      this.login(str.code)
     } else {
       this.showFailed = true
       console.log('授权失败')
     }
   },
   methods: {
-    login () {
-      const code = window.localStorage.getItem('DD_X_CODE')
-      this.$http.security.login({
-        code: code
-      })
+    handleOauth2 () {
+      window.location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appConfig.appId}&redirect_uri=${appConfig.appUrl}&response_type=code&scope=snsapi_userinfo&state=dndnyun#wechat_redirect`)
+    },
+    login (_code) {
+      this.$http
+        .security
+        .login({
+          code: _code
+        })
         .then(res => {
+          window.localStorage.setItem('DD_X_USER_INFO', JSON.stringify(res))
           console.log(res)
+        })
+        .catch(e => {
+          console.log('获取用户信息失败', e)
+          this.showFailed = true
+          weui.topTips('获取用户信息失败')
         })
     }
   }
