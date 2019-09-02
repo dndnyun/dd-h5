@@ -3,10 +3,10 @@ import day from 'dayjs'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './components/common'
-import './filters'
-import './directives'
-import './services'
+import '@/components/common'
+import '@/filters'
+import '@/directives'
+import '@/services'
 
 Vue.prototype.$day = day
 
