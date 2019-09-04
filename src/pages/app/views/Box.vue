@@ -31,7 +31,7 @@ export default {
           icon: 'dd-chaolianjie',
           title: '链接分享',
           desc: '输入你分享的链接地址',
-          path: ''
+          path: 'new-link'
         },
         {
           icon: 'dd-tuwenxiangqing',
@@ -109,7 +109,6 @@ export default {
             i {
               color: #fff;
               font-size: rem(24);
-              height: rem(24);
             }
           }
 

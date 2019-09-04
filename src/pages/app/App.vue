@@ -5,12 +5,7 @@
 </template>
 
 <script>
-import { getQueryParameters } from '@/assets/helper.js'
-
-const str = getQueryParameters()
-if (str.code) {
-  window.localStorage.setItem('DD_X_CODE', str.code)
-}
+// import { getQueryParameters } from '@/assets/helper.js'
 
 // // 生成签名的时间戳(当前时间)
 // const timestamp = new Date().getTime()
@@ -47,18 +42,8 @@ if (str.code) {
 
 export default {
   mounted () {
-    this.login()
   },
   methods: {
-    login () {
-      const code = window.localStorage.getItem('DD_X_CODE')
-      this.$http.security.login({
-        code: code
-      })
-        .then(res => {
-          console.log(res)
-        })
-    }
   }
 }
 </script>

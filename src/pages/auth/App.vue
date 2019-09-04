@@ -21,7 +21,8 @@
           </p>
           <p class="weui-footer__text">Copyright &copy; 2019-2020 dndnyun.com</p>
         </div>
-      </div>    </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,14 +55,19 @@ export default {
           code: _code
         })
         .then(res => {
-          window.localStorage.setItem('DD_X_USER_INFO', JSON.stringify(res))
           console.log(res)
+          window.localStorage.setItem('DD_X_USER_INFO', JSON.stringify(res))
+          this.goApp()
         })
         .catch(e => {
           console.log('获取用户信息失败', e)
           this.showFailed = true
           weui.topTips('获取用户信息失败')
         })
+    },
+    goApp () {
+      let path = 'http://' + window.location.host + '/app.html'
+      window.location.replace(path)
     }
   }
 }

@@ -103,6 +103,7 @@ export default {
     .post-content {
       flex: 1;
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
       padding: 0 rem(15);
 
       h2 {
@@ -110,10 +111,9 @@ export default {
         font-weight: 500;
         color: #333;
         line-height: rem(24);
-        margin: 0 0 rem(7);
         text-align: center;
         padding-bottom: rem(10);
-        margin-top: rem(30);
+        margin: rem(30) 0 rem(7);
         border-bottom: rem(.5) solid #E5E5E5;
       }
 

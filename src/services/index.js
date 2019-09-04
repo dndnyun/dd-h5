@@ -1,6 +1,6 @@
 'use strict'
 import axios from 'axios'
-import { url } from './api'
+import { url } from './config'
 import Vue from 'vue'
 
 window.__axiosCancelTokenArr = []
@@ -10,7 +10,11 @@ window.__axiosCancelTokenArr = []
  */
 axios.interceptors.request.use(requestConfig => {
   let configs = requestConfig
-  configs.headers['token'] = ''
+  let userInfo = getToken()
+  if (userInfo) {
+    configs.headers['x_safe_token'] = userInfo.token
+  }
+  console.log(userInfo.token)
   configs.cancelToken = new axios.CancelToken(cancel => {
     window.__axiosCancelTokenArr.push({ cancel })
   })
@@ -24,10 +28,11 @@ axios.interceptors.request.use(requestConfig => {
  * 响应回调错误处理、数据处理等逻辑
  */
 axios.interceptors.response.use(response => {
-  if (response.code === 0) {
-    return Promise.resolve(response.data)
+  let result = response.data
+  if (result.code === 0) {
+    return Promise.resolve(result.data)
   } else {
-    return Promise.reject(response.msg) // 返回接口错误信息
+    return Promise.reject(result.msg) // 返回接口错误信息
   }
 }, error => {
   console.log(error)
@@ -68,3 +73,11 @@ files.keys().forEach(file => {
 })
 
 Vue.prototype.$http = services
+
+function getToken () {
+  let userInfo = window.localStorage.getItem('DD_X_USER_INFO')
+  if (userInfo) {
+    userInfo = JSON.parse(userInfo)
+  }
+  return userInfo
+}
