@@ -37,6 +37,7 @@ export default {
 
     .main-tab-bar-wrap {
       border-radius: rem(20) rem(20) 0 0;
+      box-shadow: 0 rem(-10) rem(30) rgba(black, .1);
       height: rem(60);
       background: #FDCE03;
       display: flex;

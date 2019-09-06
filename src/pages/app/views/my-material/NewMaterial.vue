@@ -98,6 +98,7 @@ export default {
 
     .page-title {
       background: #FDCE03;
+      box-shadow: 0 rem(10) rem(30) rgba(black, .1);
     }
 
     .post-content {
@@ -169,6 +170,7 @@ export default {
     .post-btn {
       height: rem(60);
       background: #FDCE03;
+      box-shadow: 0 rem(-10) rem(30) rgba(black, .1);
       display: flex;
 
       div {

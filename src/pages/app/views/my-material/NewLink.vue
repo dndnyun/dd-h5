@@ -85,6 +85,7 @@ export default {
       .input-wrap {
         background: #FFF9EC;
         border-radius: rem(20);
+        box-shadow: 0 rem(10) rem(30) rgba(black, .1);
         overflow: hidden;
 
         input {
@@ -109,6 +110,7 @@ export default {
         .next-btn {
           color: #FFF;
           background: linear-gradient(to right, #4965F9, #573AE4);
+          box-shadow: 0 rem(10) rem(30) rgba(black, .1);
           border: none;
           margin: 0;
           padding: 0 rem(30);
