@@ -15,7 +15,7 @@
       <p>输入分享的链接地址，生成属于你自己的分享内容</p>
 
       <div class="input-wrap">
-        <input type="text" v-model="url" placeholder="请输入分享的链接地址">
+        <input type="text" v-model="url" placeholder="请输入分享的链接地址" v-clear-jack>
       </div>
 
       <div class="btn-wrap" @click="handleCreate">
@@ -41,6 +41,9 @@ export default {
     }
   },
   methods: {
+    handleBlur () {
+      window.scroll(0, 0)
+    },
     handleCreate () {
       if (!this.url) {
         weui.topTips('请输入分享的链接地址')

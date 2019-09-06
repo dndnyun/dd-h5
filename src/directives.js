@@ -5,3 +5,14 @@ Vue.directive('focus', {
     el.focus()
   }
 })
+
+Vue.directive('clearJack', {
+  bind: function (el) {
+    el.onblur = () => {
+      window.scroll(0, 0)
+    }
+  },
+  unbind: function (el) {
+    el.onblur = null
+  }
+})

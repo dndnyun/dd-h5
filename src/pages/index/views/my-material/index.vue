@@ -117,6 +117,7 @@ export default {
       this.loading = true
       let id = ''
       if (_action === 'down') {
+        this.items = []
         this.getPostList()
       } else {
         id = this.items[this.items.length - 1].id
