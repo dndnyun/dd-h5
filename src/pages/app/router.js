@@ -39,6 +39,11 @@ export default new Router({
       path: '/new-link',
       name: 'new-link',
       component: () => import('./views/my-material/NewLink.vue')
+    },
+    {
+      path: '/new-success',
+      name: 'new-success',
+      component: () => import('./views/my-material/NewSuccess.vue')
     }
   ]
 })

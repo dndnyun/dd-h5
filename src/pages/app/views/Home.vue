@@ -33,6 +33,7 @@ export default {
     .main-content {
       flex: 1;
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .main-tab-bar-wrap {

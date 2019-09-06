@@ -12,12 +12,14 @@
 
     <div class="link-content">
 
+      <p>输入分享的链接地址，生成属于你自己的分享内容</p>
+
       <div class="input-wrap">
         <input type="text" v-model="url" placeholder="请输入分享的链接地址">
       </div>
 
       <div class="btn-wrap" @click="handleCreate">
-        <button class="next-btn">下一步</button>
+        <button class="next-btn">生成</button>
         <i class="ddfont dd-arrow-right arrow-right"></i>
       </div>
 
@@ -47,7 +49,7 @@ export default {
       this.createLink()
     },
     createLink () {
-      this.loading = weui.loading('loading')
+      this.loading = weui.loading('创建中...')
       this.$http
         .content
         .createLink({
@@ -56,12 +58,25 @@ export default {
         .then(res => {
           console.log(res)
           this.loading.hide()
+          this.successAlert()
         })
         .catch(e => {
           console.log('创建分享的链接地址失败', e)
           weui.topTips('创建分享的链接地址失败')
           this.loading.hide()
         })
+    },
+    successAlert () {
+      weui.alert('请到我的素材中查看已生成的页面', {
+        title: '生成链接成功',
+        buttons: [{
+          label: '立即查看',
+          type: 'primary',
+          onClick: () => {
+            this.$router.push({ name: 'my-material' })
+          }
+        }]
+      })
     }
   }
 }
@@ -81,6 +96,11 @@ export default {
 
     .link-content {
       padding: rem(10) rem(30);
+
+      p {
+        color: #fff7d1;
+        margin: rem(30);
+      }
 
       .input-wrap {
         background: #FFF9EC;

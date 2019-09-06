@@ -1,35 +1,41 @@
 <template>
-  <div class="page-wrap my-material-wrap">
-    <div class="page-title">
-      我的素材
-      <ul class="page-breadcrumb">
-        <li>
-          <router-link :to="{ name: 'box'}">首页</router-link>
+  <div id="minirefresh" class="my-material-wrap minirefresh-wrap">
+
+    <div class="minirefresh-scroll">
+
+      <div class="page-title">
+        我的素材
+        <ul class="page-breadcrumb">
+          <li>
+            <router-link :to="{ name: 'box'}">首页</router-link>
+          </li>
+          <li><span>我的素材</span></li>
+        </ul>
+      </div>
+
+      <ul class="box-list">
+        <li v-for="(item, key, index) in items" :key="index" @click="handleStatistical(item)">
+          <div class="box-item">
+
+            <div class="box-icon">
+              <img class="img" v-if="item.src" :src="item.src" alt="文章缩略图">
+              <i class="ddfont dd-tupian" v-if="!item.src"></i>
+            </div>
+
+            <div class="box-content">
+              <div class="title">{{ item.title }}</div>
+            </div>
+
+            <div class="box-right">
+              <i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i>
+            </div>
+          </div>
+          <div class="desc">{{ item.desc }}</div>
         </li>
-        <li><span>我的素材</span></li>
       </ul>
+
     </div>
 
-    <ul class="box-list">
-      <li v-for="(item, key, index) in items" :key="index" @click="handleStatistical(item)">
-        <div class="box-item">
-
-          <div class="box-icon">
-            <img class="img" v-if="item.src" src="../../../../../public/images/icon.png" alt="文章缩略图">
-            <i class="ddfont dd-tupian" v-if="!item.src"></i>
-          </div>
-
-          <div class="box-content">
-            <div class="title">{{ item.title }}</div>
-          </div>
-
-          <div class="box-right">
-            <i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i>
-          </div>
-        </div>
-        <div class="desc">{{ item.desc }}</div>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -37,39 +43,53 @@
 export default {
   data () {
     return {
+      miniRefresh: null,
+      loading: false,
       items: [
-        {
-          icon: 'dd-chaolianjie',
-          title: '这是一篇长篇大论标题的文章',
-          desc: '今日0人，近7天0人',
-          path: 'my-material'
-        },
-        {
-          icon: 'dd-tuwenxiangqing',
-          title: '这是有标题的文章',
-          desc: '今日0人，近7天0人',
-          path: ''
-        },
-        {
-          icon: 'dd-sucai',
-          title: '这是文章',
-          desc: '今日0人，近7天0人',
-          path: 'my-material'
-        },
-        {
-          icon: 'dd-bangzhu',
-          title: '我是一个有文化的文章标题',
-          desc: '今日0人，近7天0人',
-          path: ''
-        },
-        {
-          icon: 'dd-guanyuwomen',
-          title: '我的标题真的很短，信不信由你，反正我是信了',
-          desc: '今日0人，近7天0人',
-          path: ''
-        }
+        // {
+        //   src: '',
+        //   title: '这是一篇长篇大论标题的文章',
+        //   desc: '今日0人，近7天0人',
+        //   path: 'my-material'
+        // },
+        // {
+        //   src: '',
+        //   title: '这是有标题的文章',
+        //   desc: '今日0人，近7天0人',
+        //   path: ''
+        // },
+        // {
+        //   src: '',
+        //   title: '这是文章',
+        //   desc: '今日0人，近7天0人',
+        //   path: 'my-material'
+        // },
+        // {
+        //   src: '',
+        //   title: '我是一个有文化的文章标题',
+        //   desc: '今日0人，近7天0人',
+        //   path: ''
+        // },
+        // {
+        //   src: '',
+        //   title: '我的标题真的很短，信不信由你，反正我是信了',
+        //   desc: '今日0人，近7天0人',
+        //   path: ''
+        // }
       ]
     }
+  },
+  mounted () {
+    this.miniRefresh = new MiniRefresh({
+      container: '#minirefresh',
+      down: {
+        isAuto: true,
+        callback: this.downCallback
+      },
+      up: {
+        callback: this.upCallback
+      }
+    })
   },
   methods: {
     handleStatistical (_item) {
@@ -77,6 +97,55 @@ export default {
     },
     handlePost (_item) {
       console.log('文章页面', _item)
+    },
+    downCallback () {
+      // 下拉事件
+      console.log('下拉')
+      this.getList('down')
+    },
+    upCallback () {
+      // 上拉事件
+      console.log('上拉')
+      this.getList('up')
+    },
+    getList (_action) {
+      if (this.loading) {
+        this.miniRefresh.endDownLoading()
+        this.miniRefresh.endUpLoading()
+        return
+      }
+      this.loading = true
+      let id = ''
+      if (_action === 'down') {
+        this.getPostList()
+      } else {
+        id = this.items[this.items.length - 1].id
+        this.getPostList({
+          articleId: id
+        })
+      }
+    },
+    getPostList (_params) {
+      this.$http
+        .content
+        .getPostList(_params)
+        .then(res => {
+          console.log(res)
+
+          this.loading = false
+
+          if (res.length > 0) this.items = this.items.concat(res)
+
+          this.miniRefresh.endUpLoading(res.length < 10)
+
+          this.miniRefresh.endDownLoading()
+        })
+        .catch(e => {
+          console.log('获取页面列表失败', e)
+          weui.topTips('获取页面列表失败')
+          this.miniRefresh.endDownLoading()
+          this.miniRefresh.endUpLoading()
+        })
     }
   }
 
@@ -89,7 +158,11 @@ export default {
   .my-material-wrap {
     /*background: linear-gradient(to bottom, #FCCE02, #FEA909);*/
     background: #FCCE02;
-    min-height: 100%;
+    /*min-height: 100%;*/
+
+    .minirefresh-scroll {
+      background: #FCCE02;
+    }
 
     .page-title {
       color: #fff7d1;
@@ -153,6 +226,7 @@ export default {
               width: rem(50);
               height: rem(50);
               border-radius: rem(20);
+              background: #ffdd46;
             }
 
             .ddfont {
