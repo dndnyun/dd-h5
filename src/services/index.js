@@ -10,11 +10,11 @@ window.__axiosCancelTokenArr = []
  */
 axios.interceptors.request.use(requestConfig => {
   let configs = requestConfig
-  let userInfo = getToken()
+  let userInfo = appConfig.getToken()
   if (userInfo) {
     configs.headers['x_safe_token'] = userInfo.token
+    console.log(userInfo.token)
   }
-  console.log(userInfo.token)
   configs.cancelToken = new axios.CancelToken(cancel => {
     window.__axiosCancelTokenArr.push({ cancel })
   })
@@ -73,11 +73,3 @@ files.keys().forEach(file => {
 })
 
 Vue.prototype.$http = services
-
-function getToken () {
-  let userInfo = window.localStorage.getItem('DD_X_USER_INFO')
-  if (userInfo) {
-    userInfo = JSON.parse(userInfo)
-  }
-  return userInfo
-}

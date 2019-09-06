@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import '@/services'
 
-if (!appConfig.isWx) {
-  window.location.replace('http://' + window.location.host + '/error.html')
+if (appConfig.isWx) {
+  window.location.replace('http://' + window.location.host + '/index.html')
 } else {
   Vue.config.productionTip = false
 

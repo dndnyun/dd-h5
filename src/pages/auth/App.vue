@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     handleOauth2 () {
-      window.location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appConfig.appId}&redirect_uri=${appConfig.appUrl}&response_type=code&scope=snsapi_userinfo&state=dndnyun#wechat_redirect`)
+      window.location.replace(appConfig.wxAuth)
     },
     login (_code) {
       this.$http
@@ -66,7 +66,7 @@ export default {
         })
     },
     goApp () {
-      let path = 'http://' + window.location.host + '/app.html'
+      let path = 'http://' + window.location.host + '/index.html'
       window.location.replace(path)
     }
   }
