@@ -81,11 +81,19 @@ export default {
   },
   mounted () {
     this.mescroll = new MeScroll(this.$refs.mescroll, {
-      isBounce: false,
       down: {
+        isBounce: false,
         callback: this.downCallback
       },
       up: {
+        isBounce: false,
+        auto: true, // 是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
+        page: {
+          num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
+          size: 10 // 每页数据的数量
+        },
+        noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
+        htmlNodata: '<p class="upwarp-nodata">没有更多数据了</p>',
         callback: this.upCallback
       }
     })
@@ -119,9 +127,7 @@ export default {
         this.getPostList()
       } else {
         if (this.items.length < 1) {
-          this.mescroll.endSucces({
-            hasNext: false
-          })
+          this.mescroll.endSuccess(this.items.length)
           return
         }
         id = this.items[this.items.length - 1].id
@@ -141,9 +147,9 @@ export default {
 
           if (res.length > 0) this.items = this.items.concat(res)
 
-          this.mescroll.endSuccess({
-            hasNext: res.length === 10
-          })
+          this.mescroll.endSuccess(res.length)
+
+          console.log(this.mescroll)
         })
         .catch(e => {
           console.log('获取页面列表失败', e)
