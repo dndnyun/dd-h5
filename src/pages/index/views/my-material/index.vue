@@ -119,7 +119,9 @@ export default {
         this.getPostList()
       } else {
         if (this.items.length < 1) {
-          this.mescroll.endSucces(false)
+          this.mescroll.endSucces({
+            hasNext: false
+          })
           return
         }
         id = this.items[this.items.length - 1].id
