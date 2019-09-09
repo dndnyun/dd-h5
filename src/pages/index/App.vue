@@ -5,42 +5,62 @@
 </template>
 
 <script>
-// import { getQueryParameters } from '@/assets/helper.js'
+import { randomString } from '@/assets/helper.js'
 
-// // 生成签名的时间戳(当前时间)
-// const timestamp = new Date().getTime()
-// const signature = '' // 签名
-//
-// // 必填，需要使用的JS接口列表
-// const jsApiList = [
-//   'checkJsApi',
-//   'onMenuShareTimeline',
-//   'onMenuShareAppMessage',
-//   'onMenuShareQQ',
-//   'onMenuShareWeibo',
-//   'onMenuShareQZone'
-// ]
-//
-// wx.config({
-//   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-//   appId: appConfig.appId, // 必填，公众号的唯一标识
-//   timestamp: timestamp, // 必填，生成签名的时间戳
-//   nonceStr: randomString(false, 32), // 必填，生成签名的随机串
-//   signature: signature, // 必填，签名
-//   jsApiList: jsApiList // 必填，需要使用的JS接口列表
-// })
-//
-// wx.ready(function () {
-//   // 配置成功之后回调
-//   console.log('微信JS SDK配置成功！')
-// })
-//
-// wx.error(function (res) {
-//   console.log('微信JS SDK配置错误！')
-//   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-// })
+export default {
+  data () {
+    return {}
+  },
+  mounted () {
+    this.getSignature()
+  },
+  methods: {
+    getSignature () {
+      this.$http
+        .security
+        .getSignature({
+          app: appConfig.appId
+        })
+        .then(res => {
+          console.log(res)
+        })
+    },
+    setWx (_signature) {
+      // 生成签名的时间戳(当前时间)
+      const timestamp = new Date().getTime()
+      const signature = '' // 签名
 
-export default {}
+      // 必填，需要使用的JS接口列表
+      const jsApiList = [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'onMenuShareQZone'
+      ]
+
+      wx.config({
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: appConfig.appId, // 必填，公众号的唯一标识
+        timestamp: timestamp, // 必填，生成签名的时间戳
+        nonceStr: randomString(false, 32), // 必填，生成签名的随机串
+        signature: signature, // 必填，签名
+        jsApiList: jsApiList // 必填，需要使用的JS接口列表
+      })
+
+      wx.ready(function () {
+        // 配置成功之后回调
+        console.log('微信JS SDK配置成功！')
+      })
+
+      wx.error(function (res) {
+        console.log('微信JS SDK配置错误！')
+        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">

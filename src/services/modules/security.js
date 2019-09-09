@@ -9,6 +9,11 @@ export default {
     // 登录
     login: (_params) => {
       return axios.post('/login/wechat/public', _params)
+    },
+    getSignature: (_params) => {
+      return axios.get('/wechat/signature/sdk', {
+        // params: _params
+      })
     }
   }
 }

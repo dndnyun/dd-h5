@@ -1,7 +1,7 @@
 <template>
-  <div id="minirefresh" class="my-material-wrap minirefresh-wrap">
+  <div ref="mescroll" class="my-material-wrap mescroll">
 
-    <div class="minirefresh-scroll">
+    <div class="mescroll-scroll">
 
       <div class="page-title">
         我的素材
@@ -43,7 +43,7 @@
 export default {
   data () {
     return {
-      miniRefresh: null,
+      mescroll: null,
       loading: false,
       items: [
         // {
@@ -80,10 +80,9 @@ export default {
     }
   },
   mounted () {
-    this.miniRefresh = new MiniRefresh({
-      container: '#minirefresh',
+    this.mescroll = new MeScroll(this.$refs.mescroll, {
+      isBounce: false,
       down: {
-        isAuto: true,
         callback: this.downCallback
       },
       up: {
@@ -110,8 +109,7 @@ export default {
     },
     getList (_action) {
       if (this.loading) {
-        this.miniRefresh.endDownLoading()
-        this.miniRefresh.endUpLoading()
+        this.mescroll.endSuccess()
         return
       }
       this.loading = true
@@ -120,6 +118,10 @@ export default {
         this.items = []
         this.getPostList()
       } else {
+        if (this.items.length < 1) {
+          this.mescroll.endSucces(false)
+          return
+        }
         id = this.items[this.items.length - 1].id
         this.getPostList({
           articleId: id
@@ -137,15 +139,14 @@ export default {
 
           if (res.length > 0) this.items = this.items.concat(res)
 
-          this.miniRefresh.endUpLoading(res.length < 10)
-
-          this.miniRefresh.endDownLoading()
+          this.mescroll.endSuccess({
+            hasNext: res.length === 10
+          })
         })
         .catch(e => {
           console.log('获取页面列表失败', e)
           weui.topTips('获取页面列表失败')
-          this.miniRefresh.endDownLoading()
-          this.miniRefresh.endUpLoading()
+          this.mescroll.endErr()
         })
     }
   }
