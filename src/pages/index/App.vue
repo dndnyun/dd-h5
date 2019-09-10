@@ -15,23 +15,23 @@ export default {
   },
   methods: {
     getSignature () {
+      let location = window.location
+      let url = 'http://' + location.host + location.pathname + location.search
       this.$http
         .security
         .getSignature({
-          app: appConfig.appId
+          url: url
         })
         .then(res => {
           this.setWx(res)
-          console.log(res)
         })
     },
     setWx (_options) {
       // 必填，需要使用的JS接口列表
       const jsApiList = [
         'checkJsApi',
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'onMenuShareQQ',
+        'updateAppMessageShareData',
+        'updateTimelineShareData',
         'onMenuShareWeibo',
         'onMenuShareQZone'
       ]
