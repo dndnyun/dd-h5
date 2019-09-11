@@ -99,23 +99,18 @@ export default {
 
           button {
             &:last-child {
-              background: #FDCE03;
-              color: #FFF;
-              border-radius: rem(20) 0 0;
-              font-size: rem(16);
-              width: 60%;
-              flex: initial;
+              color: #06AE56;
             }
 
             flex: 1;
-            font-size: rem(14);
             height: rem(50);
             line-height: rem(50);
             background: none;
             padding: 0;
             margin: 0;
             border: 0;
-            color: #424242;
+            color: #828282;
+            font-size: rem(16);
           }
         }
       }
