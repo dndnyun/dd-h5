@@ -19,9 +19,9 @@ export default {
   data () {
     return {
       visible: false,
-      title: '标题',
-      content: '内容！',
       closed: false,
+      title: '温馨提示',
+      content: '系统操作异常，请稍后重试！',
       confirmText: '确定',
       cancelText: '取消'
     }

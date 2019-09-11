@@ -45,16 +45,16 @@ export default {
     this.$dialog({
       title: '温馨提示',
       content: '您的分享次数已不足，是否充值获得更多分享次数？',
-      confirmText: '充值',
-      cancelText: '返回',
+      confirmText: '去充值',
+      cancelText: '返回首页',
       onClose: this.dialogOnClose
     })
   },
   methods: {
     dialogOnClose (_activity) {
-      // if (_activity === 'cancel') {
-      this.$router.back()
-      // }
+      if (_activity === 'cancel') {
+        this.$router.back()
+      }
     },
     handleCreate () {
       if (!this.url) {
@@ -82,16 +82,27 @@ export default {
         })
     },
     successAlert () {
-      weui.alert('请到我的素材中查看已生成的页面', {
+      this.$dialog({
         title: '生成链接成功',
-        buttons: [{
-          label: '立即查看',
-          type: 'primary',
-          onClick: () => {
+        content: '请到我的素材中查看已生成的页面',
+        confirmText: '立即查看',
+        cancelText: '取消',
+        onClose: (_activity) => {
+          if (_activity === 'confirm') {
             this.$router.push({ name: 'my-material' })
           }
-        }]
+        }
       })
+      // weui.alert('请到我的素材中查看已生成的页面', {
+      //   title: '生成链接成功',
+      //   buttons: [{
+      //     label: '立即查看',
+      //     type: 'primary',
+      //     onClick: () => {
+      //       this.$router.push({ name: 'my-material' })
+      //     }
+      //   }]
+      // })
     }
   }
 }
