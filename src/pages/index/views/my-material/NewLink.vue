@@ -40,9 +40,21 @@ export default {
       loading: null
     }
   },
+  mounted () {
+    console.log(1111)
+    this.$dialog({
+      title: '温馨提示',
+      content: '您的分享次数已不足，是否充值获得更多分享次数？',
+      confirmText: '充值',
+      cancelText: '返回',
+      onClose: this.dialogOnClose
+    })
+  },
   methods: {
-    handleBlur () {
-      window.scroll(0, 0)
+    dialogOnClose (_activity) {
+      // if (_activity === 'cancel') {
+      this.$router.back()
+      // }
     },
     handleCreate () {
       if (!this.url) {
