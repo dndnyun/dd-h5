@@ -1,8 +1,5 @@
 <template>
   <div class="page-wrap box-wrap">
-
-    <PageTitle title="登登获客"></PageTitle>
-
     <ul class="box-list">
       <li v-for="(item, key, index) in items" :key="index" @click="handleClick(item)">
         <div class="box-item">
@@ -50,12 +47,6 @@ export default {
           title: '如何使用',
           desc: '教你使用登登获客',
           path: ''
-        },
-        {
-          icon: 'dd-guanyuwomen',
-          title: '关于我们',
-          desc: '登登获客可以做什么',
-          path: ''
         }
       ]
     }
@@ -73,6 +64,8 @@ export default {
   @import "@/assets/index.scss";
 
   .box-wrap {
+    background: #EDECED;
+
     .box-list {
       padding: rem(10) rem(30);
 

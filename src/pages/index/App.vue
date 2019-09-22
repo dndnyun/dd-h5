@@ -23,7 +23,7 @@ export default {
           url: url
         })
         .then(res => {
-          this.setWx(res)
+          // this.setWx(res)
         })
     },
     setWx (_options) {
@@ -48,6 +48,15 @@ export default {
       wx.ready(() => {
         // 配置成功之后回调
         console.log('微信JS SDK配置成功！')
+        wx.updateAppMessageShareData({
+          title: '这是一条言论', // 分享标题
+          desc: '这条言论很自由，你知道吗？', // 分享描述
+          link: 'http://dd.chongdingdahui.com/share.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: 'http://dd.chongdingdahui.com/images/icon.png', // 分享图标
+          success: function () {
+            // 设置成功
+          }
+        })
       })
 
       wx.error((res) => {

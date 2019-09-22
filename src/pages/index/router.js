@@ -9,21 +9,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('./views/Home.vue'),
-      redirect: '/box',
-      children: [
-        {
-          path: '/box',
-          name: 'box',
-          component: () => import('./views/Box.vue')
-        },
-        {
-          path: '/user',
-          name: 'user',
-          component: () => import('./views/User.vue')
-        }
-      ]
+      redirect: '/box'
+    },
+    {
+      path: '/box',
+      name: 'box',
+      component: () => import('./views/Box.vue')
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: () => import('./views/User.vue')
     },
     {
       path: '/my-material',

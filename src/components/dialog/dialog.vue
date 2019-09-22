@@ -1,17 +1,17 @@
 <template>
   <div class="s-dialog-wrap">
-    <transition name="s-dialog-fade">
-      <div class="s-dialog-content" v-show="visible">
-        <div class="s-dialog-body">
-          <div class="title">{{title}}</div>
-          <div class="content">{{content}}</div>
-          <div class="button-wrap">
-            <button @click="close('cancel')">{{cancelText}}</button>
-            <button @click="close('confirm')">{{confirmText}}</button>
-          </div>
+    <!--    <transition name="s-dialog-fade">-->
+    <div class="s-dialog-content" v-show="visible">
+      <div class="s-dialog-body">
+        <div class="title">{{title}}</div>
+        <div class="content">{{content}}</div>
+        <div class="button-wrap">
+          <button @click="close('cancel')">{{cancelText}}</button>
+          <button @click="close('confirm')">{{confirmText}}</button>
         </div>
       </div>
-    </transition>
+    </div>
+    <!--    </transition>-->
   </div>
 </template>
 <script>
@@ -30,13 +30,14 @@ export default {
     closed (newVal) {
       if (newVal) {
         this.visible = false
-        this.$el.addEventListener('transitionend', this.destroyElement)
+        this.destroyElement()
+        // this.$el.addEventListener('transitionend', this.destroyElement)
       }
     }
   },
   methods: {
     destroyElement () {
-      this.$el.removeEventListener('transitionend', this.destroyElement)
+      // this.$el.removeEventListener('transitionend', this.destroyElement)
       this.$destroy(true)
       this.$el.parentNode.removeChild(this.$el)
     },

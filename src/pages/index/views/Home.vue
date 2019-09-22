@@ -1,16 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div class="main-content">
-      <router-view/>
-    </div>
-    <div class="main-tab-bar-wrap">
-      <div>
-        <router-link :to="{ name: 'box'}"><i class="ddfont dd-index"></i><span>首页</span></router-link>
-      </div>
-      <div>
-        <router-link :to="{ name: 'user'}"><i class="ddfont dd-wode"></i><span>我的</span></router-link>
-      </div>
-    </div>
+    <router-view/>
   </div>
 </template>
 
