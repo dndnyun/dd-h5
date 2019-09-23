@@ -1,24 +1,42 @@
 <template>
-  <div id="app" class="__dd_copyright-wrap">
-    版权归原作者所有，侵权立删
+  <div id="app">
+    <div class="__dd_copyright-wrap" v-if="channel === 'share'">版权归原作者所有，侵权立删</div>
+    <Detail v-if="channel === 'detail'"></Detail>
   </div>
 </template>
 
 <script>
+import { getQueryParameters } from '@/assets/helper.js'
+import Detail from './components/Detail'
 
 export default {
+  components: { Detail },
   data () {
-    return {}
+    return {
+      queryString: {},
+      channel: ''
+    }
+  },
+  mounted () {
+    this.queryString = getQueryParameters()
+    console.log(this.queryString)
+    this.judgeChannel(this.queryString.channel)
+  },
+  methods: {
+    judgeChannel (_channel) {
+      if (_channel === 'detail') {
+        this.channel = 'detail'
+      } else {
+        this.channel = 'share'
+      }
+      console.log('分辨平台', _channel)
+    }
   }
 }
 </script>
 
 <style lang="scss">
-  $fontSize: 16;
-
-  @function rem($args) {
-    @return $args / $fontSize+rem;
-  }
+  @import "@/assets/index.scss";
 
   html, body {
     font-size: 16px;
@@ -29,9 +47,17 @@ export default {
     height: 100%;
   }
 
-  body {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  :focus {
+    outline: none;
+  }
+
+  ::selection {
+    background: none;
+  }
+
+  #app {
+    height: 0;
+    width: 0;
   }
 
   .__dd_content-wrap {

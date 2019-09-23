@@ -1,5 +1,8 @@
 <template>
   <div class="page-wrap box-wrap">
+
+    <Banner></Banner>
+
     <ul class="box-list">
       <li v-for="(item, key, index) in items" :key="index" @click="handleClick(item)">
         <div class="box-item">
@@ -19,8 +22,12 @@
 </template>
 
 <script>
+import Banner from '@/components/index/Banner'
+
 export default {
-  name: 'Box',
+  components: {
+    Banner
+  },
   data () {
     return {
       items: [
