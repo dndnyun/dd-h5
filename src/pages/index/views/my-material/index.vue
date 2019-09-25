@@ -27,7 +27,7 @@
             </div>
 
             <div class="box-right">
-              <i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i>
+              <a :href="`${item.url}?channel=detail`"><i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i></a>
             </div>
           </div>
           <div class="desc">{{ item.desc }}</div>
@@ -51,30 +51,6 @@ export default {
         //   title: '这是一篇长篇大论标题的文章',
         //   desc: '今日0人，近7天0人',
         //   path: 'my-material'
-        // },
-        // {
-        //   src: '',
-        //   title: '这是有标题的文章',
-        //   desc: '今日0人，近7天0人',
-        //   path: ''
-        // },
-        // {
-        //   src: '',
-        //   title: '这是文章',
-        //   desc: '今日0人，近7天0人',
-        //   path: 'my-material'
-        // },
-        // {
-        //   src: '',
-        //   title: '我是一个有文化的文章标题',
-        //   desc: '今日0人，近7天0人',
-        //   path: ''
-        // },
-        // {
-        //   src: '',
-        //   title: '我的标题真的很短，信不信由你，反正我是信了',
-        //   desc: '今日0人，近7天0人',
-        //   path: ''
         // }
       ]
     }

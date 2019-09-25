@@ -5,10 +5,10 @@
     </svg>
     <div class="banner-body">
       <div class="avatar-wrap">
-        <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELMBDPdVJwic9lAlYul72WUFfcwkWTxWI50vNWYMpFw9kOHweynqwHicEaSy66iclKJhhhNeLXkcEvJw/132" alt="avatar">
+        <img :src="userInfo.user.avatar" alt="avatar">
       </div>
       <div class="content-wrap">
-        <div class="info-wrap">剩余获客次数 次</div>
+        <div class="info-wrap">剩余获客次数 {{wallet.hasShareCount}} 次</div>
         <div class="btn-wrap">
           <button>分享</button>
           <button>购买</button>
@@ -23,15 +23,33 @@ export default {
   name: 'Banner',
   data () {
     return {
-      userInfo: {}
+      userInfo: {
+        user: {}
+      },
+      wallet: {}
     }
   },
   mounted () {
-    // this.getUser()
+    this.getUser()
+    this.getWallet()
   },
   methods: {
     getUser () {
       this.userInfo = appConfig.getToken()
+    },
+    getWallet () {
+      this.$http
+        .security
+        .getWallet()
+        .then(res => {
+          console.log(res)
+          this.wallet = res
+        })
+        .catch(e => {
+          console.log('获取用户信息失败', e)
+          weui.topTips('获取用户信息失败')
+          this.mescroll.endErr()
+        })
     }
   }
 }

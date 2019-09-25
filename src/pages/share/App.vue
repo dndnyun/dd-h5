@@ -67,7 +67,7 @@ export default {
 
   .__dd_copyright-wrap {
     position: fixed;
-    bottom: rem(3);
+    bottom: rem(30);
     left: 50%;
     transform: translate(-50%);
     font-size: rem(12);

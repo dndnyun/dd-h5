@@ -18,9 +18,12 @@ export default {
 
     // 获取 ticket
     getTicket: (_params) => {
-      return axios.get('/wechat/jsapi/ticket', {
-        // params: _params
-      })
+      return axios.get('/wechat/jsapi/ticket')
+    },
+
+    // 获取 钱包
+    getWallet: (_params) => {
+      return axios.get('/user/wallet')
     }
   }
 }
