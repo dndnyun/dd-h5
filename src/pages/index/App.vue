@@ -73,7 +73,6 @@ export default {
 
   .page-wrap {
     position: relative;
-    overflow: hidden;
     min-height: 100%;
   }
 
