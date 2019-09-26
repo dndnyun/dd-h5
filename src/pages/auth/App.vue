@@ -32,16 +32,27 @@ import { getQueryParameters } from '@/assets/helper.js'
 export default {
   data () {
     return {
-      showFailed: false
+      showFailed: false,
+      queryString: {}
     }
   },
   mounted () {
-    const str = getQueryParameters()
-    if (str.code) {
-      this.login(str.code)
+    this.queryString = getQueryParameters()
+    if (this.queryString.code) {
+      this.login(this.queryString.code)
     } else {
-      this.showFailed = true
-      console.log('授权失败')
+      if (this.queryString.state === 'app') {
+        this.showFailed = true
+        console.log('授权失败')
+      } else {
+        if (appConfig.isiOS) {
+          window.WeixinJSBridge.call('closeWindow')
+        } else {
+          document.addEventListener('WeixinJSBridgeReady', function () {
+            window.WeixinJSBridge.call('closeWindow')
+          }, false)
+        }
+      }
     }
   },
   methods: {
@@ -66,7 +77,13 @@ export default {
         })
     },
     goApp () {
-      let path = 'http://' + window.location.host + '/index.html'
+      let page = ''
+      if (this.queryString.state === 'app') {
+        page = '/index.html'
+      } else {
+        page = '/share.html?channel=share'
+      }
+      let path = appConfig.siteUrl + page
       window.location.replace(path)
     }
   }

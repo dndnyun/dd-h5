@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="__dd_copyright-wrap" v-if="channel === 'share'">版权归原作者所有，侵权立删</div>
+    <Share v-if="channel === 'share'"></Share>
     <Detail v-if="channel === 'detail'"></Detail>
   </div>
 </template>
@@ -8,9 +8,10 @@
 <script>
 import { getQueryParameters } from '@/assets/helper.js'
 import Detail from './components/Detail'
+import Share from './components/Share'
 
 export default {
-  components: { Detail },
+  components: { Detail, Share },
   data () {
     return {
       queryString: {},
@@ -63,18 +64,5 @@ export default {
   .__dd_content-wrap {
     height: 100%;
     width: 100%;
-  }
-
-  .__dd_copyright-wrap {
-    position: fixed;
-    bottom: rem(30);
-    left: 50%;
-    transform: translate(-50%);
-    font-size: rem(12);
-    background: rgba(0, 0, 0, .7);
-    padding: rem(2) rem(5);
-    white-space: nowrap;
-    border-radius: rem(6);
-    color: #fff;
   }
 </style>

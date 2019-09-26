@@ -27,7 +27,7 @@
             </div>
 
             <div class="box-right">
-              <a :href="`${item.url}?channel=detail`"><i class="ddfont dd-gengduo icon-right" @click.stop="handlePost(item)"></i></a>
+              <a :href="`${item.url}?channel=detail`"><i class="ddfont dd-gengduo icon-right"></i></a>
             </div>
           </div>
           <div class="desc">{{ item.desc }}</div>
@@ -77,9 +77,6 @@ export default {
   methods: {
     handleStatistical (_item) {
       console.log('统计页面', _item)
-    },
-    handlePost (_item) {
-      console.log('文章页面', _item)
     },
     downCallback () {
       // 下拉事件

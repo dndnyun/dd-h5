@@ -10,7 +10,7 @@ import '@/services'
 import Dialog from '@/components/dialog'
 
 if (!appConfig.isWx) {
-  window.location.replace('http://' + window.location.host + '/error.html')
+  window.location.replace(appConfig.siteUrl + '/error.html')
 } else if (!appConfig.getToken()) {
   window.location.replace(appConfig.wxAuth)
 } else {
