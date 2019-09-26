@@ -13,8 +13,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .user-wrap {
   }
 </style>

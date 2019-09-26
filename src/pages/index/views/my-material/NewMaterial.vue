@@ -89,8 +89,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .new-material-wrap {
     display: flex;
     flex-flow: column;

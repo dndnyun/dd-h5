@@ -9,9 +9,9 @@
     siteUrl: siteUrl,
     isWx: /MicroMessenger/.test(u),
     isiOS: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-    wxAuth: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appId + '&redirect_uri=' + siteUrl + '/auth.html&response_type=code&scope=snsapi_userinfo&state=app#wechat_redirect',
+    wxAuth: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appId + '&redirect_uri=' + encodeURIComponent(siteUrl + '/auth.html') + '&response_type=code&scope=snsapi_userinfo&state=app#wechat_redirect',
     getWxAuth: function (_state) {
-      return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appId + '&redirect_uri=' + siteUrl + '/auth.html&response_type=code&scope=snsapi_userinfo&state=' + _state + '#wechat_redirect'
+      return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appId + '&redirect_uri=' + encodeURIComponent(siteUrl + '/auth.html') + '&response_type=code&scope=snsapi_userinfo&state=' + _state + '#wechat_redirect'
     },
     getToken: function () {
       var userInfo = window.localStorage.getItem('DD_X_USER_INFO')

@@ -37,8 +37,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   html, body {
     font-size: 16px;
     padding: 0;

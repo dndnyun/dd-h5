@@ -11,8 +11,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .main-wrap {
     display: flex;
     flex-flow: column;

@@ -56,8 +56,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .banner-wrap {
     position: relative;
     width: 100%;

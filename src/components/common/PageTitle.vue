@@ -21,8 +21,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .box-title {
     width: 100%;
     background: none;

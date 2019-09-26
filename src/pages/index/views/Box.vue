@@ -68,8 +68,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .box-wrap {
     background: #EDECED;
 

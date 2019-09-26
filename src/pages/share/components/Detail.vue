@@ -32,8 +32,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .detail-wrap {
 
     .btn-wrap {

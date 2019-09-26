@@ -109,8 +109,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .new-link-wrap {
     min-height: 100%;
     background: #FDCE03;

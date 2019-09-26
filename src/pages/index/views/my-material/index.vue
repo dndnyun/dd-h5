@@ -136,8 +136,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/index.scss";
-
   .my-material-wrap {
     /*background: linear-gradient(to bottom, #FCCE02, #FEA909);*/
     background: #FCCE02;
