@@ -36,21 +36,46 @@ export default {
   name: 'NewLink',
   data () {
     return {
+      userInfo: {
+        user: {}
+      },
+      wallet: {},
       url: '',
       loading: null
     }
   },
   mounted () {
-    console.log(1111)
-    this.$dialog({
-      title: '温馨提示',
-      content: '您的分享次数已不足，是否充值获得更多分享次数？',
-      confirmText: '去充值',
-      cancelText: '返回首页',
-      onClose: this.dialogOnClose
-    })
+    this.getUser()
+    this.getWallet()
   },
   methods: {
+    getUser () {
+      this.userInfo = appConfig.getToken()
+    },
+    getWallet () {
+      this.$http
+        .security
+        .getWallet()
+        .then(res => {
+          console.log(res)
+          this.wallet = res
+
+          if (this.wallet.hasShareCount < 1) {
+            this.$dialog({
+              title: '温馨提示',
+              content: '您的分享次数已不足，是否充值获得更多分享次数？',
+              confirmText: '去充值',
+              cancelText: '返回首页',
+              onClose: this.dialogOnClose
+            })
+          }
+        })
+        .catch(e => {
+          console.log('获取用户信息失败', e)
+          weui.topTips('获取用户信息失败')
+          this.mescroll.endErr()
+        })
+    },
     dialogOnClose (_activity) {
       if (_activity === 'cancel') {
         this.$router.back()

@@ -16,11 +16,10 @@ export default {
   methods: {
     getSignature () {
       let location = window.location
-      let url = 'http://' + location.host + location.pathname + location.search
       this.$http
         .security
         .getSignature({
-          url: url
+          url: location.href
         })
         .then(res => {
           // this.setWx(res)

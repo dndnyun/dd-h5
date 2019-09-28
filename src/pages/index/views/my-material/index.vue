@@ -27,7 +27,7 @@
             </div>
 
             <div class="box-right">
-              <a :href="`${item.url}?channel=detail`"><i class="ddfont dd-gengduo icon-right"></i></a>
+              <i class="ddfont dd-gengduo icon-right" @click="handleDetail(item)"></i>
             </div>
           </div>
           <div class="desc">{{ item.desc }}</div>
@@ -40,9 +40,14 @@
 </template>
 
 <script>
+import qs from 'qs'
+
 export default {
   data () {
     return {
+      userInfo: {
+        user: {}
+      },
       mescroll: null,
       loading: false,
       items: [
@@ -56,27 +61,42 @@ export default {
     }
   },
   mounted () {
-    this.mescroll = new MeScroll(this.$refs.mescroll, {
-      down: {
-        isBounce: false,
-        callback: this.downCallback
-      },
-      up: {
-        isBounce: false,
-        auto: true, // 是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
-        page: {
-          num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-          size: 10 // 每页数据的数量
-        },
-        noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
-        htmlNodata: '<p class="upwarp-nodata">没有更多数据了</p>',
-        callback: this.upCallback
-      }
-    })
+    this.initList()
+    this.userInfo = appConfig.getToken()
   },
   methods: {
+    initList () {
+      this.mescroll = new MeScroll(this.$refs.mescroll, {
+        down: {
+          isBounce: false,
+          callback: this.downCallback
+        },
+        up: {
+          isBounce: false,
+          auto: true, // 是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
+          page: {
+            num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
+            size: 10 // 每页数据的数量
+          },
+          noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
+          htmlNodata: '<p class="upwarp-nodata">没有更多数据了</p>',
+          callback: this.upCallback
+        }
+      })
+    },
     handleStatistical (_item) {
       console.log('统计页面', _item)
+    },
+    handleDetail (_item) {
+      let params = {
+        channel: 'detail', // 分享页 - share ， 详情页 - detail
+        userId: this.userInfo.user.id, // 用户 id
+        articleId: _item.id // 文章 id
+      }
+
+      let paramsStr = qs.stringify(params)
+
+      window.location.href = `${appConfig.siteUrl}/share.html?${paramsStr}`
     },
     downCallback () {
       // 下拉事件

@@ -24,6 +24,13 @@ export default {
       return axios.get('/article/share/generate', {
         params: _params
       })
+    },
+
+    // 通过 id 获取文章详情
+    getArticleById (_params) {
+      return axios.get('article/get', {
+        params: _params
+      })
     }
   }
 }
