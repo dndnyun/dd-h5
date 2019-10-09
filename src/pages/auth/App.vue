@@ -81,7 +81,7 @@ export default {
       if (this.queryString.state === 'app') {
         page = '/index.html'
       } else {
-        page = '/share.html?channel=share'
+        page = '/share.html?channel=share&articleId=' + this.queryString.state
       }
       let path = appConfig.siteUrl + page
       window.location.replace(path)

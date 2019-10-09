@@ -1,5 +1,5 @@
 <template>
-  <div class="s-dialog-wrap">
+  <div class="s-dialog-wrap" @touchumove.self.prevent>
     <!--    <transition name="s-dialog-fade">-->
     <div class="s-dialog-content" v-show="visible">
       <div class="s-dialog-body">

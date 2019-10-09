@@ -30,7 +30,7 @@
               <i class="ddfont dd-gengduo icon-right" @click="handleDetail(item)"></i>
             </div>
           </div>
-          <div class="desc">{{ item.desc }}</div>
+          <div class="desc">今日阅读 {{ item.readedNumber }} 人， 累计阅读 {{ item.readedNumber }} 人</div>
         </li>
       </ul>
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-// 自动加载 global 目录下的 .js 结尾的文件
+// 自动加载 global 目录下的 .vue 结尾的文件
 const componentsContext = require.context('./', true, /\.vue$/)
 
 componentsContext.keys().forEach(component => {

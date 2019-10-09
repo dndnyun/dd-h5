@@ -5,9 +5,18 @@
 </template>
 
 <script>
+import { getQueryParameters } from '@/assets/helper.js'
+
 export default {
   name: 'Share',
+  data () {
+    return {
+      queryString: {}
+    }
+  },
   beforeCreate () {
+    this.queryString = getQueryParameters()
+    if (!this.queryString.userId) return
     window.location.replace(appConfig.getWxAuth(window.location.href))
   }
 }
