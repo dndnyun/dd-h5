@@ -28,9 +28,14 @@ export default {
 
     // 通过 id 获取文章详情
     getArticleById (_params) {
-      return axios.get('article/get', {
+      return axios.get('/article/get', {
         params: _params
       })
+    },
+
+    // 通过 id 阅读文章，用于观看时长
+    readArticleById (_params) {
+      return axios.post('/article/read', _params)
     }
   }
 }

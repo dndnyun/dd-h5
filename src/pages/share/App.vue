@@ -44,6 +44,29 @@ export default {
         })
         .then(res => {
           this.article = res
+
+          let params = {
+            channel: 'share', // 分享页 - share ， 详情页 - detail
+            userId: this.queryString.userId, // 用户 id
+            articleId: this.queryString.articleId // 文章 id
+          }
+
+          let paramsStr = qs.stringify(params)
+
+          wx.ready(() => {
+            // 配置成功之后回调
+            console.log('微信JS SDK配置成功！')
+            wx.updateAppMessageShareData({
+              title: this.article.title + ' - 登登获客', // 分享标题
+              desc: this.article.summary + ' - 登登获客', // 分享描述
+              link: appConfig.siteUrl + '/share.html?' + paramsStr, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: appConfig.siteUrl + '/img/logo.png', // 分享图标
+              success: function () {
+                // 设置成功
+                console.log('设置成功')
+              }
+            })
+          })
           console.log('获取文章', res)
 
           this.getSignature()
@@ -77,28 +100,6 @@ export default {
         nonceStr: _options.nonceStr, // 必填，生成签名的随机串
         signature: _options.signature, // 必填，签名
         jsApiList: jsApiList // 必填，需要使用的JS接口列表
-      })
-
-      let params = {
-        channel: 'share', // 分享页 - share ， 详情页 - detail
-        userId: this.queryString.userId, // 用户 id
-        articleId: this.queryString.articleId // 文章 id
-      }
-
-      let paramsStr = qs.stringify(params)
-
-      wx.ready(() => {
-        // 配置成功之后回调
-        console.log('微信JS SDK配置成功！')
-        wx.updateAppMessageShareData({
-          title: this.article.title, // 分享标题
-          desc: this.article.summary, // 分享描述
-          link: appConfig.siteUrl + '/share.html?' + paramsStr, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: appConfig.siteUrl + '/img/logo.png', // 分享图标
-          success: function () {
-            // 设置成功
-          }
-        })
       })
 
       wx.error((res) => {

@@ -11,13 +11,48 @@ export default {
   name: 'Share',
   data () {
     return {
-      queryString: {}
+      queryString: {},
+      readId: '',
+      timer: null
     }
   },
   beforeCreate () {
     this.queryString = getQueryParameters()
     if (!this.queryString.userId) return
     window.location.replace(appConfig.getWxAuth(this.queryString.articleId))
+  },
+  mounted () {
+    clearInterval(this.timer)
+    this.readArticleById()
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    readArticleById (_readId) {
+      this
+        .$http
+        .content
+        .readArticleById({
+          articleId: this.queryString.articleId,
+          readId: _readId
+        })
+        .then(res => {
+          this.readId = res.id
+          this.timer = setInterval(() => {
+            this.readArticleByReadId(res.id)
+          }, 1000 * 10)
+        })
+    },
+    readArticleByReadId (_readId) {
+      this
+        .$http
+        .content
+        .readArticleById({
+          articleId: this.queryString.articleId,
+          readId: _readId
+        })
+    }
   }
 }
 </script>
