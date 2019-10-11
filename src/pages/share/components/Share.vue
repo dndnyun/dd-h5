@@ -17,7 +17,7 @@ export default {
   beforeCreate () {
     this.queryString = getQueryParameters()
     if (!this.queryString.userId) return
-    window.location.replace(appConfig.getWxAuth(window.location.href))
+    window.location.replace(appConfig.getWxAuth(this.queryString.articleId))
   }
 }
 </script>

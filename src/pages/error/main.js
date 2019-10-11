@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 if (appConfig.isWx) {
-  window.location.replace('http://' + window.location.host + '/index.html')
+  window.location.replace(appConfig.siteUrl + '/index.html')
 } else {
   Vue.config.productionTip = false
 
