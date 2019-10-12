@@ -1,20 +1,23 @@
 <template>
-  <div ref="mescroll" class="my-material-wrap mescroll">
+  <div ref="mescroll" class="material-detail-wrap mescroll">
 
     <div class="mescroll-scroll">
 
       <div class="page-title">
-        我的素材
+        文章统计
         <ul class="page-breadcrumb">
           <li>
             <router-link :to="{ name: 'box'}">首页</router-link>
           </li>
-          <li><span>我的素材</span></li>
+          <li>
+            <router-link :to="{ name: 'my-material'}">我的素材</router-link>
+          </li>
+          <li><span>文章统计</span></li>
         </ul>
       </div>
 
       <ul class="box-list">
-        <li v-for="(item, key, index) in items" :key="index" @click="handleStatistical(item)">
+        <li v-for="(item, key, index) in list" :key="index" @click="handleUser(item)">
           <div class="box-item">
 
             <div class="box-icon">
@@ -23,14 +26,14 @@
             </div>
 
             <div class="box-content">
-              <div class="title">{{ item.title }}</div>
+              <div class="title">{{ item.UserId }}</div>
             </div>
 
-            <div class="box-right">
-              <i class="ddfont dd-gengduo icon-right" @click.stop="handleDetail(item)"></i>
-            </div>
+            <!--            <div class="box-right">-->
+            <!--              <i class="ddfont dd-gengduo icon-right" @click="handleDetail(item)"></i>-->
+            <!--            </div>-->
           </div>
-          <div class="desc">今日阅读 {{ item.readedNumber }} 人， 累计阅读 {{ item.readedNumber }} 人</div>
+          <div class="desc">点击查看 {{ item.ReadTimes }} 次， 共计 {{ item.ReadTime }} 分钟</div>
         </li>
       </ul>
 
@@ -40,105 +43,34 @@
 </template>
 
 <script>
-import qs from 'qs'
+import scrollMixins from '@/mixins/scrollMixins'
 
 export default {
+  name: 'index',
+  mixins: [scrollMixins],
   data () {
-    return {
-      userInfo: {
-        user: {}
-      },
-      mescroll: null,
-      loading: false,
-      items: [
-        // {
-        //   src: '',
-        //   title: '这是一篇长篇大论标题的文章',
-        //   desc: '今日0人，近7天0人',
-        //   path: 'my-material'
-        // }
-      ]
-    }
+    return {}
   },
   mounted () {
-    this.initList()
     this.userInfo = appConfig.getToken()
   },
   methods: {
-    initList () {
-      this.mescroll = new MeScroll(this.$refs.mescroll, {
-        down: {
-          isBounce: false,
-          callback: this.downCallback
-        },
-        up: {
-          isBounce: false,
-          auto: true, // 是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
-          page: {
-            num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-            size: 10 // 每页数据的数量
-          },
-          noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
-          htmlNodata: '<p class="upwarp-nodata">没有更多数据了</p>',
-          callback: this.upCallback
-        }
-      })
+    handleUser (_item) {
+      this.$router.push({ name: 'user-material', query: { article: _item.ArticleId, user: _item.UserId } })
+      console.log(_item)
     },
-    handleStatistical (_item) {
-      console.log('统计页面 - ', _item)
-      this.$router.push({ name: 'detail-material', query: { id: _item.id } })
-    },
-    handleDetail (_item) {
-      let params = {
-        channel: 'detail', // 分享页 - share ， 详情页 - detail
-        userId: this.userInfo.user.id, // 用户 id
-        articleId: _item.id // 文章 id
-      }
-
-      let paramsStr = qs.stringify(params)
-
-      window.location.href = `${appConfig.siteUrl}/share.html?${paramsStr}`
-    },
-    downCallback () {
-      // 下拉事件
-      console.log('下拉')
-      this.getList('down')
-    },
-    upCallback () {
-      // 上拉事件
-      console.log('上拉')
-      this.getList('up')
-    },
-    getList (_action) {
-      if (this.loading) {
-        this.mescroll.endSuccess()
-        return
-      }
-      this.loading = true
-      if (_action === 'down') {
-        this.items = []
-        this.getPostList()
-      } else {
-        if (this.items.length < 1) {
-          this.mescroll.endSuccess(this.items.length)
-          return
-        }
-        let id = this.items[this.items.length - 1].id
-        this.getPostList(id)
-      }
-    },
-    getPostList (_params) {
+    getListServer (_params) {
       this.$http
         .content
-        .getPostList({
-          articleId: _params
+        .getPostDetail({
+          articleId: Number(this.$route.query.id)
         })
         .then(res => {
           console.log(res)
 
           this.loading = false
 
-          if (res.length > 0) this.items = this.items.concat(res)
+          if (res.length > 0) this.list = this.list.concat(res)
 
           this.mescroll.endSuccess(res.length)
 
@@ -151,13 +83,11 @@ export default {
         })
     }
   }
-
 }
 </script>
 
 <style lang="scss">
-  .my-material-wrap {
-    /*background: linear-gradient(to bottom, #FCCE02, #FEA909);*/
+  .material-detail-wrap {
     background: #FCCE02;
     /*min-height: 100%;*/
 

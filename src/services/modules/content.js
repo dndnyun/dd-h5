@@ -36,6 +36,19 @@ export default {
     // 通过 id 阅读文章，用于观看时长
     readArticleById (_params) {
       return axios.post('/article/read', _params)
+    },
+
+    // 通过 id 查看文章阅读情况
+    getPostDetail (_params) {
+      return axios.get('/article/stat/read', {
+        params: _params
+      })
+    },
+    // 通过 id 查看文章阅读情况
+    getPostDetailUser (_params) {
+      return axios.get('/article/stat/read/detail', {
+        params: _params
+      })
     }
   }
 }

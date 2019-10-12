@@ -27,6 +27,16 @@ export default new Router({
       component: () => import('./views/my-material/index.vue')
     },
     {
+      path: '/detail-material',
+      name: 'detail-material',
+      component: () => import('./views/my-material/detail/index.vue')
+    },
+    {
+      path: '/user-material',
+      name: 'user-material',
+      component: () => import('./views/my-material/detail/User.vue')
+    },
+    {
       path: '/new-material',
       name: 'new-material',
       component: () => import('./views/my-material/NewMaterial.vue')
