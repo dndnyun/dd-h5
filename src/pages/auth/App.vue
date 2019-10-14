@@ -39,7 +39,11 @@ export default {
   mounted () {
     this.queryString = getQueryParameters()
     if (this.queryString.code) {
-      this.login(this.queryString.code)
+      if (this.queryString.state === 'app') {
+        this.login(this.queryString.code)
+      } else {
+        this.loginShare(this.queryString.code)
+      }
     } else {
       if (this.queryString.state === 'app') {
         this.showFailed = true
@@ -63,6 +67,23 @@ export default {
       this.$http
         .security
         .login({
+          code: _code
+        })
+        .then(res => {
+          console.log(res)
+          window.localStorage.setItem('DD_X_USER_INFO', JSON.stringify(res))
+          this.goApp()
+        })
+        .catch(e => {
+          console.log('获取用户信息失败', e)
+          this.showFailed = true
+          weui.topTips('获取用户信息失败')
+        })
+    },
+    loginShare (_code) {
+      this.$http
+        .security
+        .loginShare({
           code: _code
         })
         .then(res => {

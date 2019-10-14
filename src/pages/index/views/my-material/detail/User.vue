@@ -24,12 +24,12 @@
           <div class="box-item">
 
             <div class="box-icon">
-              <img class="img" v-if="item.cover" :src="item.cover" alt="文章缩略图">
-              <i class="ddfont dd-tupian" v-if="!item.cover"></i>
+              <img class="img" v-if="item.avatar" :src="item.avatar" alt="文章缩略图">
+              <i class="ddfont dd-tupian" v-if="!item.avatar"></i>
             </div>
 
             <div class="box-content">
-              <div class="title">时间： {{ item.createTime }}， 浏览时长 {{ item.ReadTime }} 秒</div>
+              <div class="title">点击时间 {{ item.createTime }}， 浏览时长 {{ item.readTime }} 秒</div>
             </div>
           </div>
         </li>

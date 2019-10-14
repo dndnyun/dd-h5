@@ -21,19 +21,19 @@
           <div class="box-item">
 
             <div class="box-icon">
-              <img class="img" v-if="item.cover" :src="item.cover" alt="文章缩略图">
-              <i class="ddfont dd-tupian" v-if="!item.cover"></i>
+              <img class="img" v-if="item.avatar" :src="item.avatar" alt="文章缩略图">
+              <i class="ddfont dd-tupian" v-if="!item.avatar"></i>
             </div>
 
             <div class="box-content">
-              <div class="title">{{ item.UserId }}</div>
+              <div class="title">{{ item.username }}</div>
             </div>
 
             <!--            <div class="box-right">-->
             <!--              <i class="ddfont dd-gengduo icon-right" @click="handleDetail(item)"></i>-->
             <!--            </div>-->
           </div>
-          <div class="desc">点击查看 {{ item.ReadTimes }} 次， 共计 {{ item.ReadTime }} 分钟</div>
+          <div class="desc">点击查看 {{ item.readTimes }} 次， 共计 {{ item.readTime | sToHs }} 分钟</div>
         </li>
       </ul>
 
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     handleUser (_item) {
-      this.$router.push({ name: 'user-material', query: { article: _item.ArticleId, user: _item.UserId } })
+      this.$router.push({ name: 'user-material', query: { article: _item.articleId, user: _item.userId } })
       console.log(_item)
     },
     getListServer (_params) {
