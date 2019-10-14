@@ -48,14 +48,14 @@ export default {
       this.loading = true
       let id = ''
       if (_action === 'down') {
-        this.items = []
+        this.list = []
         this.getListServer()
       } else {
-        if (this.items.length < 1) {
-          this.mescroll.endSuccess(this.items.length)
+        if (this.list.length < 1) {
+          this.mescroll.endSuccess(this.list.length)
           return
         }
-        id = this.items[this.items.length - 1].id
+        id = this.list[this.list.length - 1].id
         this.getListServer(id)
       }
     }

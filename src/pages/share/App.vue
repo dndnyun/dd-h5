@@ -60,7 +60,7 @@ export default {
               title: this.article.title + ' - 登登获客', // 分享标题
               desc: this.article.summary + ' - 登登获客', // 分享描述
               link: appConfig.siteUrl + '/share.html?' + paramsStr, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: appConfig.siteUrl + '/img/logo.png', // 分享图标
+              imgUrl: appConfig.siteUrl + '/favicon.jpeg', // 分享图标
               success: function () {
                 // 设置成功
                 console.log('设置成功')

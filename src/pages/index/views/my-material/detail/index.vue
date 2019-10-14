@@ -22,7 +22,7 @@
 
             <div class="box-icon">
               <img class="img" v-if="item.avatar" :src="item.avatar" alt="文章缩略图">
-              <i class="ddfont dd-tupian" v-if="!item.avatar"></i>
+              <i class="ddfont dd-user" v-if="!item.avatar"></i>
             </div>
 
             <div class="box-content">
