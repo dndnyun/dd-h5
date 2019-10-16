@@ -1,7 +1,8 @@
 'use strict'
 import axios from 'axios'
-import { url } from './config'
 import Vue from 'vue'
+import { url } from './config'
+import { getQueryParameters } from '@/assets/helper.js'
 
 window.__axiosCancelTokenArr = []
 /**
@@ -36,16 +37,19 @@ axios.interceptors.response.use(response => {
   }
 }, error => {
   console.log(error)
-  return Promise.reject(error.response ? error.response.data : error.response) // 返回接口错误信息
+  // return Promise.reject(error.response ? error.response.data : error.response) // 返回接口错误信息
 
-  // if (error.response && error.response.status === 401) {
-  //   localStorage.removeItem('CR_USER')
-  //   _vue.$router.push({
-  //     path: '/'
-  //   })
-  // } else {
-  //   return Promise.reject(error.response ? error.response.data : error.response) // 返回接口返回的错误信息
-  // }
+  if (error.response && error.response.data.code === 7) {
+    appConfig.removeToken()
+    let queryString = getQueryParameters()
+    if (queryString.channel === 'share') {
+      window.location.replace(appConfig.getWxAuth(queryString.articleId))
+    } else {
+      window.location.replace(appConfig.wxAuth)
+    }
+  } else {
+    return Promise.reject(error.response ? error.response.data : error.response) // 返回接口返回的错误信息
+  }
 })
 
 /**

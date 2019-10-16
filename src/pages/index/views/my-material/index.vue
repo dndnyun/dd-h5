@@ -18,8 +18,7 @@
           <div class="box-item">
 
             <div class="box-icon">
-              <img class="img" v-if="item.cover" :src="item.cover" onerror="this.src='/favicon.jpeg'" alt="文章缩略图">
-              <i class="ddfont dd-tupian" v-if="!item.cover"></i>
+              <img class="img" :src="item.cover" onerror="this.src='/favicon.jpeg'" alt="文章缩略图">
             </div>
 
             <div class="box-content">

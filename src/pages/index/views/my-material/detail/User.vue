@@ -29,7 +29,7 @@
             </div>
 
             <div class="box-content">
-              <div class="title">点击时间 {{ item.createTime }}， 浏览时长 {{ item.readTime }} 秒</div>
+              <div class="title">点击时间 {{ item.createTime | dateFormat('YYYY年M月D日') }}， 浏览时长 {{ item.readTime }} 秒</div>
             </div>
           </div>
         </li>

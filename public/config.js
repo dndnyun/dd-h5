@@ -19,6 +19,9 @@
         userInfo = JSON.parse(userInfo)
       }
       return userInfo
+    },
+    removeToken: function () {
+      window.localStorage.removeItem('DD_X_USER_INFO')
     }
   }
 })()
