@@ -18,9 +18,9 @@ const filters = {
     h += ''
     s += ''
     // 如果只有一位数，前面增加一个 0
-    h = (h.length === 1) ? '0' + h : h
-    s = (s.length === 1) ? '0' + s : s
-    return h + ':' + s
+    // h = (h.length === 1) ? '0' + h : h
+    // s = (s.length === 1) ? '0' + s : s
+    return h + ' 分 ' + s + ' 秒'
   }
 }
 

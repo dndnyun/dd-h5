@@ -16,25 +16,27 @@ export default {
       timer: null
     }
   },
-  beforeCreate () {
-    this.queryString = getQueryParameters()
-    if (!this.queryString.userId) return
-    window.location.replace(appConfig.getWxAuth(this.queryString.articleId))
-  },
   mounted () {
+    this.queryString = getQueryParameters()
+    console.log(this.queryString)
     clearInterval(this.timer)
-    this.readArticleById()
+    if (!this.queryString.userId) {
+      this.readArticleById()
+    } else {
+      window.location.replace(appConfig.getWxAuth(this.queryString.articleId))
+    }
   },
   beforeDestroy () {
     clearInterval(this.timer)
   },
   methods: {
     readArticleById (_readId) {
+      console.log('articleId', this.queryString.articleId)
       this
         .$http
         .content
         .readArticleById({
-          articleId: this.queryString.articleId,
+          articleId: Number(this.queryString.articleId),
           readId: _readId
         })
         .then(res => {
@@ -49,7 +51,7 @@ export default {
         .$http
         .content
         .readArticleById({
-          articleId: this.queryString.articleId,
+          articleId: Number(this.queryString.articleId),
           readId: _readId
         })
     }

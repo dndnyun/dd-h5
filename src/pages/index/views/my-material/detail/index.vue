@@ -33,7 +33,7 @@
             <!--              <i class="ddfont dd-gengduo icon-right" @click="handleDetail(item)"></i>-->
             <!--            </div>-->
           </div>
-          <div class="desc">点击查看 {{ item.readTimes }} 次， 共计 {{ item.readTime | sToHs }} 分钟</div>
+          <div class="desc">点击查看 {{ item.readTimes }} 次， 共计 {{ item.readTime | sToHs }}</div>
         </li>
       </ul>
 
