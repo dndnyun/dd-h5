@@ -4,7 +4,7 @@
       <path d="M-5.8,569.6l-0.2-33.6c48-30.2,86.9-85.8,103.6-114.5c18.2-31.4,103.3-166.7,252.9-91.8c131.7,65.9,284.2,149.4,476.4,35.5c21-12.4,76-57.8,139.2-55v259.5"/>
     </svg>
     <div class="banner-body">
-      <div class="avatar-wrap">
+      <div class="avatar-wrap" @click="goUser">
         <img :src="userInfo.user.avatar" alt="avatar">
       </div>
       <div class="content-wrap">
@@ -50,6 +50,9 @@ export default {
           weui.topTips('获取用户信息失败')
           this.mescroll.endErr()
         })
+    },
+    goUser () {
+      this.$router.push({ name: 'user' })
     }
   }
 }
