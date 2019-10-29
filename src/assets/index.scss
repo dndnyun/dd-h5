@@ -16,3 +16,17 @@ $fontSize: 16;
 @function rem($args) {
   @return $args / $fontSize + rem;
 }
+
+
+.mescroll-empty {
+  padding-top: rem(30);
+
+  .empty-icon {
+    width: rem(100);
+  }
+
+  .empty-tip {
+    color: #fff7d1 !important;
+    margin-top: rem(20);
+  }
+}

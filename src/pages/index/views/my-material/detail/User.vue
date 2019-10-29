@@ -1,5 +1,5 @@
 <template>
-  <div ref="mescroll" class="material-user-wrap mescroll">
+  <div id="mescroll" ref="mescroll" class="material-user-wrap mescroll">
 
     <div class="mescroll-scroll">
 
@@ -24,8 +24,8 @@
           <div class="box-item">
 
             <div class="box-icon">
-              <img class="img" v-if="item.avatar" :src="item.avatar" alt="文章缩略图">
-              <i class="ddfont dd-user" v-if="!item.avatar"></i>
+              <img class="img" v-if="avatar" :src="avatar" alt="用户头像">
+              <i class="ddfont dd-user" v-if="!avatar"></i>
             </div>
 
             <div class="box-content">
@@ -47,10 +47,13 @@ export default {
   name: 'User',
   mixins: [scrollMixins],
   data () {
-    return {}
+    return {
+      avatar: ''
+    }
   },
   mounted () {
     this.userInfo = appConfig.getToken()
+    this.avatar = this.$route.query.avatar
   },
   methods: {
     goDetail () {

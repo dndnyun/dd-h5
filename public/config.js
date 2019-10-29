@@ -1,7 +1,9 @@
 (function () {
   var appId = 'wx97dbf4f0bdc7e291'
   var appUrl = 'https://api.dndnyun.com'
+  // var appUrl = 'http://localhost:8000'
   var siteUrl = 'https://s.dndnyun.com'
+  // var siteUrl = 'http://localhost:8000'
   var u = window.navigator.userAgent
   window.appConfig = {
     appId: appId,

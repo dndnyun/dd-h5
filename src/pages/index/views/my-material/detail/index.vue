@@ -1,5 +1,5 @@
 <template>
-  <div ref="mescroll" class="material-detail-wrap mescroll">
+  <div id="mescroll" ref="mescroll" class="material-detail-wrap mescroll">
 
     <div class="mescroll-scroll">
 
@@ -21,7 +21,7 @@
           <div class="box-item">
 
             <div class="box-icon">
-              <img class="img" v-if="item.avatar" :src="item.avatar" alt="文章缩略图">
+              <img class="img" v-if="item.avatar" :src="item.avatar" alt="用户头像">
               <i class="ddfont dd-user" v-if="!item.avatar"></i>
             </div>
 
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     handleUser (_item) {
-      this.$router.push({ name: 'user-material', query: { article: _item.articleId, user: _item.userId } })
+      this.$router.push({ name: 'user-material', query: { article: _item.articleId, user: _item.userId, avatar: _item.avatar } })
       console.log(_item)
     },
     getListServer (_params) {

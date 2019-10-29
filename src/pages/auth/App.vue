@@ -38,25 +38,34 @@ export default {
   },
   mounted () {
     this.queryString = getQueryParameters()
+
     if (this.queryString.code) {
+      //
+      // 授权 允许 情况处理
+      //
       if (this.queryString.state === 'app') {
+        // 主站页 登录接口
         this.login(this.queryString.code)
       } else {
+        // 分享页 登录接口
         this.loginShare(this.queryString.code)
       }
     } else {
-      if (this.queryString.state === 'app') {
-        this.showFailed = true
-        console.log('授权失败')
+      //
+      // 授权 拒绝 情况处理
+      //
+      // if (this.queryString.state === 'app') {
+      //   this.showFailed = true
+      //   console.log('授权失败')
+      // } else {
+      if (appConfig.isiOS) {
+        window.WeixinJSBridge.call('closeWindow')
       } else {
-        if (appConfig.isiOS) {
+        document.addEventListener('WeixinJSBridgeReady', function () {
           window.WeixinJSBridge.call('closeWindow')
-        } else {
-          document.addEventListener('WeixinJSBridgeReady', function () {
-            window.WeixinJSBridge.call('closeWindow')
-          }, false)
-        }
+        }, false)
       }
+      // }
     }
   },
   methods: {

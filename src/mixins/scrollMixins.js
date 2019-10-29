@@ -25,6 +25,11 @@ export default {
           },
           noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
           htmlNodata: '<p class="upwarp-nodata">没有更多数据了</p>',
+          empty: {
+            warpId: 'mescroll', // 父布局的id (1.3.5版本支持传入dom元素)
+            icon: '/img/no_datas.png', // 图标,默认null,支持网络图
+            tip: '暂无相关数据~' // 提示
+          },
           callback: this.upCallback
         }
       })
