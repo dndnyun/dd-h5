@@ -63,7 +63,7 @@ export default {
           if (this.wallet.hasShareCount < 1) {
             this.$dialog({
               title: '温馨提示',
-              content: '您的分享次数已不足，是否充值获得更多分享次数？',
+              content: '您的获客次数已不足，是否充值获得更多分享次数？',
               confirmText: '去充值',
               cancelText: '返回首页',
               onClose: this.dialogOnClose
