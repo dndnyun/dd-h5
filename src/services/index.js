@@ -19,6 +19,7 @@ axios.interceptors.request.use(requestConfig => {
   configs.cancelToken = new axios.CancelToken(cancel => {
     window.__axiosCancelTokenArr.push({ cancel })
   })
+
   return configs
 }, err => {
   return Promise.reject(err)

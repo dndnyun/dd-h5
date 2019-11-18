@@ -1,204 +1,136 @@
 <template>
-  <div class="page-wrap new-material-wrap">
-    <div class="page-title">
+  <div class="page-wrap new-material-wrap new-content__wrap">
+
+    <div class="new-content__title">
+      <div class="title-left">
+        <router-link :to="{ name: 'box'}">
+          <button>首页</button>
+        </router-link>
+      </div>
       新增图文分享
-      <ul class="page-breadcrumb">
-        <li>
-          <router-link :to="{ name: 'box'}">首页</router-link>
-        </li>
-        <li><span>图文编辑</span></li>
-      </ul>
+      <div class="title-right">
+        <button @click="handleSave">提交</button>
+      </div>
     </div>
 
-    <div class="post-content">
+    <div class="new-content__text custom-post__wrap">
 
-      <div>
-        <h2>我是一个标题</h2>
-      </div>
+      <div v-for="(item, index) in contents" :key="index">
+        <h1 v-if="item.type === 'title' && item.style.size === 'title-h1'" class="content-title" :class="[item.style.align]">{{ item.content }}</h1>
+        <h2 v-if="item.type === 'title' && item.style.size === 'title-h2'" class="content-title" :class="[item.style.align]">{{ item.content }}</h2>
+        <h3 v-if="item.type === 'title' && item.style.size === 'title-h3'" class="content-title" :class="[item.style.align]">{{ item.content }}</h3>
 
-      <div>
-        <section>我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章</section>
-      </div>
+        <section v-if="item.type === 'section'" class="content-section">{{ item.content }}</section>
 
-      <div>
-        <h2>我是一个标题</h2>
-      </div>
+        <div v-if="item.type === 'image'" class="content-media">
+          <img :src="item.content" :alt="item.content">
+        </div>
 
-      <div>
-        <section>我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章</section>
-      </div>
-
-      <div>
-        <div class="img">
-          <img src="//ws1.sinaimg.cn/large/6a39992dly1fglotksjpdj20m206o0te.jpg" alt="coding">
+        <div v-if="item.type === 'video'" class="content-media">
+          <img src="/test.jpeg" alt="coding">
         </div>
       </div>
 
-      <div>
-        <section>我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章</section>
-      </div>
-
-      <div>
-        <section>我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章</section>
-      </div>
-
-      <div>
-        <section>我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章我是文章</section>
-      </div>
-
     </div>
 
-    <div class="post-btn">
-      <div v-for="item in buttons" :key="item.icon">
-        <router-link :to="{ name: item.path}"><i class="ddfont" :class="item.icon"></i><span>{{ item.title }}</span></router-link>
-      </div>
+    <div class="new-content__bottom new-content__bottom_ave">
+      <ul>
+        <li v-for="item in buttons" :key="item.icon" @click="handleButton(item)">
+          <i class="ddfont" :class="item.icon"></i><span>{{ item.title }}</span>
+        </li>
+      </ul>
     </div>
+
+    <UploaderInput ref="uploaderInput" @on-success="imageLoadSuccess"></UploaderInput>
+
+    <newTitle v-if="contentShow === 'new-title'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newTitle>
+    <newSection v-if="contentShow === 'new-section'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newSection>
   </div>
 </template>
 
 <script>
+import newTitle from '@/pages/index/components/newTitle'
+import newSection from '@/pages/index/components/newSection'
+
 export default {
   name: 'NewMaterial',
+  components: {
+    newTitle,
+    newSection
+  },
   data () {
     return {
+      contents: [],
+      contentShow: '',
       buttons: [
         {
           icon: 'dd-biaoti',
           title: '标题',
-          path: 'new-material'
+          code: 'new-title'
         },
         {
           icon: 'dd-zhengwen',
           title: '正文',
-          path: 'new-material'
+          code: 'new-section'
         },
         {
           icon: 'dd-tu',
           title: '图片',
-          path: 'new-material'
+          code: 'new-image'
         },
         {
           icon: 'dd-shipin',
           title: '视频',
-          path: 'new-material'
+          code: 'new-video'
         }
       ]
+    }
+  },
+  methods: {
+    handleButton (_item) {
+      if (_item.code === 'new-image') {
+        this.handleUploadImage()
+        return
+      }
+
+      if (_item.code === 'new-video') {
+        return
+      }
+      this.contentShow = _item.code
+    },
+    handleSave () {
+    },
+    handleCancel () {
+      this.contentShow = ''
+    },
+    handleConfirm (_item) {
+      console.log(_item)
+      this.contents.push(_item)
+      this.contentShow = ''
+    },
+    handleUploadImage () {
+      this.$refs.uploaderInput.getFile()
+    },
+    imageLoadSuccess (_url) {
+      this.contents.push({
+        type: 'image',
+        content: _url,
+        style: {}
+      })
     }
   }
 }
 </script>
 
 <style lang="scss">
+  @import "@/assets/scss/newContent.scss";
+  @import "@/assets/scss/post.scss";
+
   .new-material-wrap {
+    position: relative;
     display: flex;
     flex-flow: column;
     height: 100%;
-
-    .page-title {
-      background: #FDCE03;
-      box-shadow: 0 rem(10) rem(30) rgba(black, .1);
-    }
-
-    .post-content {
-      flex: 1;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 0 rem(15);
-
-      h2 {
-        font-size: rem(17);
-        font-weight: 500;
-        color: #333;
-        line-height: rem(24);
-        text-align: center;
-        padding-bottom: rem(10);
-        margin: rem(30) 0 rem(7);
-        border-bottom: rem(.5) solid #E5E5E5;
-      }
-
-      > div {
-        padding-bottom: rem(10);
-
-        &:last-child {
-          border-bottom: none;
-        }
-      }
-
-      .product-detail {
-        img {
-          display: block;
-          margin: auto;
-          max-width: 100%;
-        }
-      }
-
-      section {
-        font-size: rem(15);
-        color: #666;
-        line-height: rem(26);
-        white-space: pre-wrap;
-      }
-
-      .img {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #000;
-        border-radius: rem(10);
-
-        img {
-          //height: rem(200);
-          width: 100%;
-        }
-
-        .player {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          height: rem(46);
-          width: rem(46);
-          //background: url('./assets/player.png') no-repeat center;
-          background-size: 100% 100%;
-        }
-      }
-    }
-
-    .post-btn {
-      height: rem(60);
-      background: #FDCE03;
-      box-shadow: 0 rem(-10) rem(30) rgba(black, .1);
-      display: flex;
-
-      div {
-        text-align: center;
-        flex: 1;
-        font-size: rem(16);
-
-        a {
-          height: rem(60);
-          color: rgba(0, 0, 0, .3);
-          display: flex;
-          flex-flow: column;
-          justify-content: center;
-          align-items: center;
-
-          .ddfont {
-            display: block;
-            margin-right: rem(5);
-            font-size: rem(24);
-          }
-
-          span {
-            display: block;
-          }
-
-          &.router-link-exact-active {
-            color: #000;
-          }
-        }
-      }
-    }
+    overflow: hidden;
   }
 </style>

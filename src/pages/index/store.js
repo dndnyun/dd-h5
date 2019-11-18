@@ -7,7 +7,8 @@ const SET_USER = 'SET_USER'
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    content: {}
   },
   mutations: {
     [SET_USER] (state, params) {

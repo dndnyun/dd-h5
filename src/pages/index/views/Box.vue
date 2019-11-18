@@ -37,12 +37,12 @@ export default {
           desc: '输入你分享的链接地址',
           path: 'new-link'
         },
-        // {
-        //   icon: 'dd-tuwenxiangqing',
-        //   title: '图文编辑分享',
-        //   desc: '进入编辑分享你的长图文',
-        //   path: 'new-material'
-        // },
+        {
+          icon: 'dd-tuwenxiangqing',
+          title: '图文编辑分享',
+          desc: '进入编辑分享你的长图文',
+          path: 'new-material'
+        },
         {
           icon: 'dd-sucai',
           title: '我的素材',
