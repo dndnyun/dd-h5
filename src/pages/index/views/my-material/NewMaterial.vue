@@ -13,9 +13,16 @@
       </div>
     </div>
 
-    <div class="new-content__text custom-post__wrap">
+    <div class="new-content__text custom-post__wrap" @click="handleSelect('', '')">
 
-      <div v-for="(item, index) in contents" :key="index">
+      <div v-for="(item, index) in contents" :key="index" @click.stop="handleSelect(item, index)" :class="selected === index ? 'content-selected' : ''">
+
+        <div class="new-content__tools" v-show="selected === index">
+          <ul>
+            <li><i class="ddfont dd-shanchu" @click.stop="handleRemove(index)">删除</i></li>
+          </ul>
+        </div>
+
         <h1 v-if="item.type === 3 && item.style.size === 'title-h1'" class="content-title" :class="[item.style.align]">{{ item.content }}</h1>
 
         <h2 v-if="item.type === 3 && item.style.size === 'title-h2'" class="content-title" :class="[item.style.align]">{{ item.content }}</h2>
@@ -99,7 +106,8 @@ export default {
           title: '视频',
           code: 'new-video'
         }
-      ]
+      ],
+      selected: ''
     }
   },
   methods: {
@@ -134,6 +142,14 @@ export default {
         content: _url,
         style: {}
       })
+    },
+
+    handleSelect (_item, _index) {
+      this.selected = _index
+    },
+    handleRemove (_index) {
+      this.contents.splice(_index, 1)
+      this.selected = ''
     },
     createPost () {
       if (this.contents.length < 1) {
@@ -181,5 +197,44 @@ export default {
     flex-flow: column;
     height: 100%;
     overflow: hidden;
+
+    .content-selected {
+      border-radius: rem(20);
+      background: #fff;
+      padding: rem(20);
+
+      position: relative;
+      margin: rem(20) 0;
+      overflow: hidden;
+    }
+
+    .new-content__tools {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background: rgba($color: #fff, $alpha: .8);
+
+      ul {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        li {
+          float: left;
+          margin-right: rem(40);
+
+          color: #4965F9;
+
+          &:last-child {
+            color: #fc3300;
+            margin-right: 0;
+          }
+        }
+      }
+    }
   }
 </style>

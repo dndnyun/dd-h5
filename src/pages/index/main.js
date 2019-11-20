@@ -29,3 +29,7 @@ if (!appConfig.isWx && env === 'production') {
     render: h => h(App)
   }).$mount('#app')
 }
+
+if (env !== 'production') {
+  window.localStorage.setItem('DD_X_USER_INFO', '{"token":"1.cjAKcjAPdj5Re30KnkVWdSJa.315b4d094697874be3a2b47be48b718c","user":{"id":47,"username":"烤冷面","avatar":"http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELMBDPdVJwic9lAlYul72WUFfcwkWTxWI50vNWYMpFw9kOHweynqwHicEaSy66iclKJhhhNeLXkcEvJw/132","createTime":0,"updateTime":0}}')
+}
