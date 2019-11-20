@@ -9,9 +9,13 @@ import '@/directives'
 import '@/services'
 import Dialog from '@/components/dialog'
 
-if (!appConfig.isWx) {
+const env = process.env.NODE_ENV
+
+console.log(env)
+
+if (!appConfig.isWx && env === 'production') {
   window.location.replace(appConfig.siteUrl + '/error.html')
-} else if (!appConfig.getToken()) {
+} else if (!appConfig.getToken() && env === 'production') {
   window.location.replace(appConfig.wxAuth)
 } else {
   Vue.prototype.$day = day

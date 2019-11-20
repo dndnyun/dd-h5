@@ -1,5 +1,5 @@
 <template>
-  <div class="new-content__wrap">
+  <div class="new-content__wrap new-content__dialog">
     <div class="new-content__title">
       <div class="title-left">
         <button @click="handleCancel">取消</button>

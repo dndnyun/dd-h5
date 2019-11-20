@@ -4,7 +4,7 @@
     <div class="new-content__title">
       <div class="title-left">
         <router-link :to="{ name: 'box'}">
-          <button>首页</button>
+          <button>退出</button>
         </router-link>
       </div>
       新增图文分享
@@ -43,8 +43,13 @@
 
     <UploaderInput ref="uploaderInput" @on-success="imageLoadSuccess"></UploaderInput>
 
-    <newTitle v-if="contentShow === 'new-title'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newTitle>
-    <newSection v-if="contentShow === 'new-section'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newSection>
+    <transition
+      name="bounce"
+      enter-active-class="bounceInUp"
+      leave-active-class="bounceOutDown">
+      <newTitle v-if="contentShow === 'new-title'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newTitle>
+      <newSection v-if="contentShow === 'new-section'" @on-cancel="handleCancel" @on-confirm="handleConfirm"></newSection>
+    </transition>
   </div>
 </template>
 
@@ -127,7 +132,6 @@ export default {
   @import "@/assets/scss/post.scss";
 
   .new-material-wrap {
-    position: relative;
     display: flex;
     flex-flow: column;
     height: 100%;
