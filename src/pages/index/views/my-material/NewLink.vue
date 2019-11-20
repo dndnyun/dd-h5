@@ -12,14 +12,14 @@
 
     <div class="link-content">
 
-      <p>输入分享的链接地址，生成属于你自己的分享内容</p>
+      <p>输入分享的链接地址，创建属于你自己的分享内容</p>
 
       <div class="input-wrap">
         <input type="text" v-model="url" placeholder="请输入分享的链接地址" v-clear-jack>
       </div>
 
       <div class="btn-wrap" @click="handleCreate">
-        <button class="next-btn">生成</button>
+        <button class="next-btn">创建</button>
         <i class="ddfont dd-arrow-right arrow-right"></i>
       </div>
 
@@ -108,18 +108,18 @@ export default {
     },
     successAlert () {
       this.$dialog({
-        title: '生成链接成功',
-        content: '请到我的素材中查看已生成的页面',
+        title: '创建素材成功',
+        content: '请到我的素材中查看已创建的页面',
         confirmText: '立即查看',
         cancelText: '取消',
         onClose: (_activity) => {
           if (_activity === 'confirm') {
-            this.$router.push({ name: 'my-material' })
+            this.$router.replace({ name: 'my-material' })
           }
         }
       })
-      // weui.alert('请到我的素材中查看已生成的页面', {
-      //   title: '生成链接成功',
+      // weui.alert('请到我的素材中查看已创建的页面', {
+      //   title: '创建链接成功',
       //   buttons: [{
       //     label: '立即查看',
       //     type: 'primary',

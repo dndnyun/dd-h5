@@ -97,8 +97,9 @@ export default {
         weui.topTips('请填写标题内容', 2000)
         return
       }
+
       this.$emit('on-confirm', {
-        type: 'title',
+        type: 3,
         content: this.content,
         style: {
           size: this.size,
